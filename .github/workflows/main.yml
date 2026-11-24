@@ -1,5 +1,4 @@
 name: brew test-bot
-
 on:
   pull_request:
 
