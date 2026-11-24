@@ -2,9 +2,9 @@ class PhpEmbed < Formula
   desc "PHP library for embedding in applications"
   homepage "https://www.php.net/"
   # Should only be updated if the new version is announced on the homepage, https://www.php.net/
-  url "https://www.php.net/distributions/php-8.4.2.tar.xz"
-  mirror "https://fossies.org/linux/www/php-8.4.2.tar.xz"
-  sha256 "92636453210f7f2174d6ee6df17a5811368f556a6c2c2cbcf019321e36456e01"
+  url "https://www.php.net/distributions/php-8.4.28.tar.xz"
+  mirror "https://fossies.org/linux/www/php-8.4.28.tar.xz"
+  sha256 "0c8ec360e5dd8154f270b2fd50cd44ecc824e6ee39c85f911312b80d4daecd72"
   license "PHP-3.01"
 
   livecheck do

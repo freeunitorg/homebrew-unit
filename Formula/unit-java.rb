@@ -1,14 +1,14 @@
 class UnitJava < Formula
   desc "Java module for Unit application server"
-  homepage "https://unit.nginx.org"
-  url "https://github.com/nginx/unit.git",
-      tag:      "1.34.2",
-      revision: "8ab74a8cc929272eb8683d3f6ab4cb406465fd34"
-  head "https://github.com/nginx/unit.git", branch: "master"
+  homepage "https://docs.freeunit.org"
+  url "https://github.com/freeunitorg/freeunit.git",
+      tag:      "1.37.2",
+      revision: "b36f46297b8bf3e075f293f72b206daa72015ed8"
+  head "https://github.com/freeunitorg/freeunit.git", branch: "master"
 
   depends_on "openjdk@11"
   depends_on "openssl@3"
-  depends_on "unit@1.34.2"
+  depends_on "unit@1.37.2"
 
   def install
     system "./configure",

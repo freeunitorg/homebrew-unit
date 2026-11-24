@@ -1,10 +1,10 @@
 class Unit < Formula
   desc "Dynamic web and application server"
-  homepage "https://unit.nginx.org"
-  url "https://github.com/nginx/unit.git",
-      tag:      "1.34.2",
-      revision: "8ab74a8cc929272eb8683d3f6ab4cb406465fd34"
-  head "https://github.com/nginx/unit.git", branch: "master"
+  homepage "https://docs.freeunit.org"
+  url "https://github.com/freeunitorg/freeunit.git",
+      tag:      "1.37.2",
+      revision: "b36f46297b8bf3e075f293f72b206daa72015ed8"
+  head "https://github.com/freeunitorg/freeunit.git", branch: "master"
 
   depends_on "rust" => :build
   depends_on "libedit"
@@ -13,25 +13,25 @@ class Unit < Formula
   depends_on "pkg-config"
 
   resource "njs" do
-    url "https://github.com/nginx/njs.git",
-        tag:      "0.8.8",
-        revision: "78e3edf7505cd04a5df0b7936bcd2d89e95bdda8"
+    url "https://github.com/freeunitorg/njs.git",
+        tag:      "1.0.2",
+        revision: "10d6f68480b6be67ba2b0c5213702006cc4d4d74"
   end
 
   resource "unitctl" do
-    src_repo = "https://github.com/nginx/unit"
+    src_repo = "https://github.com/freeunitorg/freeunit"
     if OS.mac? && Hardware::CPU.intel?
-      url "#{src_repo}/releases/download/#{Unit.version}/unitctl-#{Unit.version}-x86_64-apple-darwin"
-      sha256 "370b709f4b2cb76e633afde66de6b6bec75943697061fdc8b0036f8209118d1d"
+      url "#{src_repo}/releases/download/unitctl/#{Unit.version}/unitctl-#{Unit.version}-x86_64-apple-darwin"
+      sha256 "603f83bfdfe42a6c0f03c49b48c2b0dfb731052f48b4e45099b8d311d050ac6f"
     elsif OS.mac? && Hardware::CPU.arm?
-      url "#{src_repo}/releases/download/#{Unit.version}/unitctl-#{Unit.version}-aarch64-apple-darwin"
-      sha256 "7fc20ce207b5a3e3f6906d658c441347499013d6eaaff782564432783a60fa14"
+      url "#{src_repo}/releases/download/unitctl/#{Unit.version}/unitctl-#{Unit.version}-aarch64-apple-darwin"
+      sha256 "e20320870795493025441166dce1c4211d11f30118b3d37d1855d06d043c443f"
     elsif OS.linux? && Hardware::CPU.intel?
-      url "#{src_repo}/releases/download/#{Unit.version}/unitctl-#{Unit.version}-x86_64-unknown-linux-gnu"
-      sha256 "2dd37ee2c663c1f5394ab7c4de79884327aad98ff4e3164b9f0a1b27859789c4"
+      url "#{src_repo}/releases/download/unitctl/#{Unit.version}/unitctl-#{Unit.version}-x86_64-unknown-linux-gnu"
+      sha256 "2136127ee9ef3743c3b552068c0343303438e7be5f69aeeb5d58afc37898f9d0"
     elsif OS.linux? && Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "#{src_repo}/releases/download/#{Unit.version}/unitctl-#{Unit.version}-aarch64-unknown-linux-gnu"
-      sha256 "0019dfc4b32d63c1392aa264aed2253c1e0c2fb09216f8e2cc269bbfb8bb49b5"
+      url "#{src_repo}/releases/download/unitctl/#{Unit.version}/unitctl-#{Unit.version}-aarch64-unknown-linux-gnu"
+      sha256 "392d8c62b3b3ec599343eb4884907cf4597c7428f7c07302b904d789e6862163"
     else
       odie "Unsupported architecture"
     end
