@@ -81,6 +81,6 @@ class UnitPhpAT85 < Formula
 
     assert_match expected_output, shell_output("curl -s 127.0.0.1:#{port}")
   ensure
-    Process.kill("TERM", pid)
+    Process.kill("TERM", pid) if pid
   end
 end
