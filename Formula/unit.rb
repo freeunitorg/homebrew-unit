@@ -2,9 +2,16 @@ class Unit < Formula
   desc "Dynamic web and application server"
   homepage "https://docs.freeunit.org"
   url "https://github.com/freeunitorg/freeunit.git",
-      tag:      "1.37.2",
-      revision: "b36f46297b8bf3e075f293f72b206daa72015ed8"
+      branch:   "1.37",
+      revision: "56ab4a5baf518b501a1afabc6b1a8c7216805b91"
+  version "1.37.3"
+
   head "https://github.com/freeunitorg/freeunit.git", branch: "master"
+
+  livecheck do
+    url "https://raw.githubusercontent.com/freeunitorg/freeunit/refs/heads/1.37/version"
+    regex(/NXT_VERSION=(\S+)/i)
+  end
 
   depends_on "rust" => :build
   depends_on "libedit"
@@ -20,17 +27,21 @@ class Unit < Formula
 
   resource "unitctl" do
     src_repo = "https://github.com/freeunitorg/freeunit"
+    # The unitctl release is a separate release series. The release of the
+    # formula version does not exist yet, so the last published release of
+    # the tool is used. The pin moves forward with the next release.
+    ctl_version = "1.37.2"
     if OS.mac? && Hardware::CPU.intel?
-      url "#{src_repo}/releases/download/unitctl/#{Unit.version}/unitctl-#{Unit.version}-x86_64-apple-darwin"
+      url "#{src_repo}/releases/download/unitctl/#{ctl_version}/unitctl-#{ctl_version}-x86_64-apple-darwin"
       sha256 "603f83bfdfe42a6c0f03c49b48c2b0dfb731052f48b4e45099b8d311d050ac6f"
     elsif OS.mac? && Hardware::CPU.arm?
-      url "#{src_repo}/releases/download/unitctl/#{Unit.version}/unitctl-#{Unit.version}-aarch64-apple-darwin"
+      url "#{src_repo}/releases/download/unitctl/#{ctl_version}/unitctl-#{ctl_version}-aarch64-apple-darwin"
       sha256 "e20320870795493025441166dce1c4211d11f30118b3d37d1855d06d043c443f"
     elsif OS.linux? && Hardware::CPU.intel?
-      url "#{src_repo}/releases/download/unitctl/#{Unit.version}/unitctl-#{Unit.version}-x86_64-unknown-linux-gnu"
+      url "#{src_repo}/releases/download/unitctl/#{ctl_version}/unitctl-#{ctl_version}-x86_64-unknown-linux-gnu"
       sha256 "2136127ee9ef3743c3b552068c0343303438e7be5f69aeeb5d58afc37898f9d0"
     elsif OS.linux? && Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "#{src_repo}/releases/download/unitctl/#{Unit.version}/unitctl-#{Unit.version}-aarch64-unknown-linux-gnu"
+      url "#{src_repo}/releases/download/unitctl/#{ctl_version}/unitctl-#{ctl_version}-aarch64-unknown-linux-gnu"
       sha256 "392d8c62b3b3ec599343eb4884907cf4597c7428f7c07302b904d789e6862163"
     else
       odie "Unsupported architecture"

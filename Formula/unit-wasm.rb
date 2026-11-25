@@ -2,13 +2,20 @@ class UnitWasm < Formula
   desc "Ruby module for Unit application server"
   homepage "https://docs.freeunit.org"
   url "https://github.com/freeunitorg/freeunit.git",
-      tag:      "1.37.2",
-      revision: "b36f46297b8bf3e075f293f72b206daa72015ed8"
+      branch:   "1.37",
+      revision: "56ab4a5baf518b501a1afabc6b1a8c7216805b91"
+  version "1.37.3"
+
   head "https://github.com/freeunitorg/freeunit.git", branch: "master"
+
+  livecheck do
+    url "https://raw.githubusercontent.com/freeunitorg/freeunit/refs/heads/1.37/version"
+    regex(/NXT_VERSION=(\S+)/i)
+  end
 
   depends_on "rust" => :build
   depends_on "openssl@3"
-  depends_on "unit@1.37.2"
+  depends_on "unit@1.37.3"
   depends_on "wasmtime"
 
   def install
