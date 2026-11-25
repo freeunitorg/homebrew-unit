@@ -8,6 +8,7 @@
 #   test/run-checks.sh                     run the checks
 #   test/run-checks.sh --eol               add the EOL check
 #   test/run-checks.sh --inreplace         add the inreplace check
+#   test/run-checks.sh --patch             add the patch check
 #   test/run-checks.sh --build <formula>   build the given formulae
 #
 set -euo pipefail
@@ -33,6 +34,7 @@ cd "${REPO_DIR}"
 
 RUN_EOL=false
 RUN_INREPLACE=false
+RUN_PATCH=false
 BUILD_TARGETS=()
 
 while [[ $# -gt 0 ]]
@@ -43,6 +45,9 @@ do
       ;;
     --inreplace)
       RUN_INREPLACE=true
+      ;;
+    --patch)
+      RUN_PATCH=true
       ;;
     --build)
       shift
@@ -131,6 +136,13 @@ then
   echo
   echo "==> inreplace patterns"
   python3 "${SCRIPT_DIR}/check-inreplace-patterns.py" || status=1
+fi
+
+if [[ "${RUN_PATCH}" == true ]]
+then
+  echo
+  echo "==> patches"
+  python3 "${SCRIPT_DIR}/check-patches.py" || status=1
 fi
 
 if [[ "${RUN_EOL}" == true ]]
