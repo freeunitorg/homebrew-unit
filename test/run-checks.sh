@@ -2,11 +2,13 @@
 # Run the local checks of the tap.
 #
 # The script runs the same checks as the CI job "check-generate".
-# It also runs the two Python checks of this repository.
+# It also runs the Python checks of this repository.
 #
 # Usage:
-#   test/run-checks.sh            run the checks
-#   test/run-checks.sh --eol      run the checks and the EOL check
+#   test/run-checks.sh                     run the checks
+#   test/run-checks.sh --eol               add the EOL check
+#   test/run-checks.sh --inreplace         add the inreplace check
+#   test/run-checks.sh --build <formula>   build the given formulae
 #
 set -euo pipefail
 
@@ -30,10 +32,34 @@ fi
 cd "${REPO_DIR}"
 
 RUN_EOL=false
-if [[ "${1:-}" == "--eol" ]]
-then
-  RUN_EOL=true
-fi
+RUN_INREPLACE=false
+BUILD_TARGETS=()
+
+while [[ $# -gt 0 ]]
+do
+  case "$1" in
+    --eol)
+      RUN_EOL=true
+      ;;
+    --inreplace)
+      RUN_INREPLACE=true
+      ;;
+    --build)
+      shift
+      while [[ $# -gt 0 && "$1" != --* ]]
+      do
+        BUILD_TARGETS+=("$1")
+        shift
+      done
+      continue
+      ;;
+    *)
+      echo "error: unknown argument $1" >&2
+      exit 2
+      ;;
+  esac
+  shift
+done
 
 # The tap name comes from the remote. A fork has another owner than the tap
 # on GitHub, so the name must not be hard coded.
@@ -60,6 +86,20 @@ ln -s "${REPO_DIR}" "${TAPS_DIR}/${TAP_DIR_NAME}"
 # the same.
 brew trust "${TAP}" >/dev/null 2>&1 || true
 
+# The names of all formulae of the tap, with the aliases.
+FORMULA_NAMES=()
+for file in "${REPO_DIR}"/Formula/*.rb
+do
+  FORMULA_NAMES+=("$(basename "${file}" .rb)")
+done
+if [[ -d "${REPO_DIR}/Aliases" ]]
+then
+  for link in "${REPO_DIR}"/Aliases/*
+  do
+    FORMULA_NAMES+=("$(basename "${link}")")
+  done
+fi
+
 status=0
 
 echo
@@ -78,11 +118,41 @@ echo
 echo "==> Component order"
 python3 "${SCRIPT_DIR}/check-components-order.py" "${REPO_DIR}/Formula" || status=1
 
+# The CI job runs the livecheck command for every formula.
+echo
+echo "==> brew livecheck for every formula"
+for name in "${FORMULA_NAMES[@]}"
+do
+  brew livecheck --formula "${TAP}/${name}" || status=1
+done
+
+if [[ "${RUN_INREPLACE}" == true ]]
+then
+  echo
+  echo "==> inreplace patterns"
+  python3 "${SCRIPT_DIR}/check-inreplace-patterns.py" || status=1
+fi
+
 if [[ "${RUN_EOL}" == true ]]
 then
   echo
   echo "==> EOL state"
   python3 "${REPO_DIR}/eol/check.py" --check || status=1
+fi
+
+if [[ ${#BUILD_TARGETS[@]} -gt 0 ]]
+then
+  for name in "${BUILD_TARGETS[@]}"
+  do
+    echo
+    echo "==> Building ${name}"
+    brew install --build-bottle "${TAP}/${name}" || status=1
+    # The CI job runs the audit after the install. The audit checks the
+    # files of the installed formula.
+    echo
+    echo "==> brew audit ${name}"
+    brew audit --formula "${TAP}/${name}" --online --git --skip-style || status=1
+  done
 fi
 
 echo
