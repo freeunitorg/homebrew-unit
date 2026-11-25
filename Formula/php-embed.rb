@@ -81,12 +81,6 @@ class PhpEmbed < Formula
               "To use the PHP apache sapi please change " \
               "your httpd config to use the prefork MPM"
 
-    inreplace "sapi/fpm/php-fpm.conf.in", ";daemonize = yes", "daemonize = no"
-
-    config_path = etc/"php/#{php_version}"
-    # Prevent system pear config from inhibiting pear install
-    (config_path/"pear.conf").delete if (config_path/"pear.conf").exist?
-
     # Prevent homebrew from hardcoding path to sed shim in phpize script
     ENV["lt_cv_path_SED"] = "sed"
 
@@ -96,32 +90,27 @@ class PhpEmbed < Formula
       ENV["SASL_CFLAGS"] = "-I#{MacOS.sdk_path_if_needed}/usr/include/sasl"
       ENV["SASL_LIBS"] = "-lsasl2"
     else
-      ENV["SQLITE_CFLAGS"] = "-I#{Formula["sqlite"].opt_include}"
+      ENV["SQLITE_CFLAGS"] = "-I#{formula_opt_include("sqlite")}"
       ENV["SQLITE_LIBS"] = "-lsqlite3"
-      ENV["BZIP_DIR"] = Formula["bzip2"].opt_prefix
+      ENV["BZIP_DIR"] = formula_opt_prefix("bzip2")
     end
 
     # Each extension that is built on Mojave needs a direct reference to the
     # sdk path or it won't find the headers
     headers_path = "=#{MacOS.sdk_path_if_needed}/usr" if OS.mac?
 
-    # `_www` only exists on macOS.
-    fpm_user = OS.mac? ? "_www" : "www-data"
-    fpm_group = OS.mac? ? "_www" : "www-data"
-
     args = %W[
       --prefix=#{prefix}
       --localstatedir=#{var}
-      --sysconfdir=#{config_path}
-      --with-config-file-path=#{config_path}
-      --with-config-file-scan-dir=#{config_path}/conf.d
+      --sysconfdir=#{etc}/php/#{version.major_minor}
+      --with-config-file-path=#{etc}/php/#{version.major_minor}
+      --with-config-file-scan-dir=#{etc}/php/#{version.major_minor}/conf.d
       --with-pear=#{pkgshare}/pear
       --enable-bcmath
       --enable-calendar
       --enable-dba
       --enable-exif
       --enable-ftp
-      --enable-fpm
       --enable-gd
       --enable-intl
       --enable-mbregex
@@ -142,13 +131,11 @@ class PhpEmbed < Formula
       --with-external-gd
       --with-external-pcre
       --with-ffi
-      --with-fpm-user=#{fpm_user}
-      --with-fpm-group=#{fpm_group}
-      --with-gettext=#{Formula["gettext"].opt_prefix}
-      --with-gmp=#{Formula["gmp"].opt_prefix}
+      --with-gettext=#{formula_opt_prefix("gettext")}
+      --with-gmp=#{formula_opt_prefix("gmp")}
       --with-iconv#{headers_path}
       --with-layout=GNU
-      --with-ldap=#{Formula["openldap"].opt_prefix}
+      --with-ldap=#{formula_opt_prefix("openldap")}
       --with-libxml
       --with-libedit
       --with-mhash#{headers_path}
@@ -156,18 +143,18 @@ class PhpEmbed < Formula
       --with-mysqli=mysqlnd
       --with-ndbm#{headers_path}
       --with-openssl
-      --with-password-argon2=#{Formula["argon2"].opt_prefix}
-      --with-pdo-dblib=#{Formula["freetds"].opt_prefix}
+      --with-password-argon2=#{formula_opt_prefix("argon2")}
+      --with-pdo-dblib=#{formula_opt_prefix("freetds")}
       --with-pdo-mysql=mysqlnd
-      --with-pdo-odbc=unixODBC,#{Formula["unixodbc"].opt_prefix}
-      --with-pdo-pgsql=#{Formula["libpq"].opt_prefix}
+      --with-pdo-odbc=unixODBC,#{formula_opt_prefix("unixodbc")}
+      --with-pdo-pgsql=#{formula_opt_prefix("libpq")}
       --with-pdo-sqlite
-      --with-pgsql=#{Formula["libpq"].opt_prefix}
+      --with-pgsql=#{formula_opt_prefix("libpq")}
       --with-pic
-      --with-snmp=#{Formula["net-snmp"].opt_prefix}
+      --with-snmp=#{formula_opt_prefix("net-snmp")}
       --with-sodium
       --with-sqlite3
-      --with-tidy=#{Formula["tidy-html5"].opt_prefix}
+      --with-tidy=#{formula_opt_prefix("tidy-html5")}
       --with-unixODBC
       --with-xsl
       --with-zip
@@ -196,8 +183,9 @@ class PhpEmbed < Formula
     cp ".libs/libphp.so", "#{lib}/" if OS.linux?
   end
 
-  def php_version
-    version.to_s.split(".")[0..1].join(".")
+  test do
+    libphp = OS.mac? ? lib/"libphp.dylib" : lib/"libphp.so"
+    assert_predicate libphp, :exist?, "expected #{libphp} to be built"
   end
 end
 

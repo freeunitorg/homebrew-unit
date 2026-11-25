@@ -65,8 +65,8 @@ class Unit < Formula
               "--openssl",
               "--njs",
               "--otel",
-              "--cc-opt=-I#{Formula["openssl"].opt_prefix}/include",
-              "--ld-opt=-L#{Formula["openssl"].opt_prefix}/lib"
+              "--cc-opt=-I#{formula_opt_include("openssl")}",
+              "--ld-opt=-L#{formula_opt_lib("openssl")}"
 
     system "make"
     system "make", "install", "libunit-install"
@@ -108,7 +108,7 @@ class Unit < Formula
                         "--statedir", "#{testpath}/state"
     sleep 3
 
-    pid = File.open(testpath/"unit.pid").gets.chop.to_i
+    pid = File.open(testpath/"unit.pid") { |f| f.gets.chop.to_i }
 
     system "curl", "-s", "--unix-socket", "#{testpath}/control.sock",
                     "-X", "PUT",
