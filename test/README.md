@@ -74,11 +74,13 @@ PHP changed the quoting of the APXS lines between the series 8.3 and 8.4. The se
 
 ## Build a formula
 
-The `--build` flag builds the given formulae. The build takes about 10 minutes for one php embed formula.
+The `--build` flag builds the given formulae. The build takes about 10 minutes for one php embed formula. The flag takes several formulae.
 
 ```bash
 docker run --rm -v "$PWD:/mnt/homebrew-unit:ro" homebrew-unit-test --build php-embed@8.3
 ```
+
+The build installs the formula and its dependencies. A dependency without a bottle is built from source. The script runs the audit and the linkage check of the formula after the install. The script unlinks the formulae before the build. The versions of the php embed formulae install the library file with the same name, and only one of them can be linked into the prefix. The CI job builds one formula per runner.
 
 ## Run the component check alone
 
