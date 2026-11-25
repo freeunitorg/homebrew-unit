@@ -44,3 +44,10 @@ The supported PHP series are 8.3, 8.4, and 8.5. The main project lists the same 
 - `eol/README.md`: the description of the EOL data and the update procedure
 - `.gitignore` for editor artefacts and OS metadata files
 - `CHANGES.md` to track formula-level changes
+
+### Checks
+
+- `eol/check.py`: the mode `--check` reported the file as stale on every run. It compared the date of the check with itself. The day counters change every day, so they did the same.
+- `eol/check.py`: the formulae of the tap no longer appear in the list of the packages. The script reads the names from the `Formula` and `Aliases` directories.
+- `eol/check.py`: the script retries a request when the Homebrew API answers with the code 503.
+- `eol/eol.json`: the versions of `php-embed@8.3` and `php-embed@8.4` are now in the section `tap_formulae`. The section `packages` holds 39 packages.

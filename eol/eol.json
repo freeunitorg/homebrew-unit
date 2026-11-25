@@ -333,20 +333,6 @@
       ],
       "status": "active"
     },
-    "php-embed@8.3": {
-      "error": "HTTP Error 503: Service Unavailable",
-      "used_by": [
-        "unit-php@8.3.rb"
-      ],
-      "status": "active"
-    },
-    "php-embed@8.4": {
-      "error": "HTTP Error 503: Service Unavailable",
-      "used_by": [
-        "unit-php@8.4.rb"
-      ],
-      "status": "active"
-    },
     "php@8.3": {
       "current_version": "8.3.37",
       "deprecated": false,
@@ -356,10 +342,10 @@
       "used_by": [
         "php-embed@8.3.rb"
       ],
+      "note": "Pinned to the PHP series that php-embed@8.3 builds. The same rule as php@8.5 applies to the versioned tap formula.",
       "disable_date_in_days": 767,
       "deprecation_date_in_days": 401,
-      "status": "scheduled_for_disable",
-      "note": "Pinned to the PHP series that php-embed@8.3 builds. The same rule as php@8.5 applies to the versioned tap formula."
+      "status": "scheduled_for_disable"
     },
     "php@8.4": {
       "current_version": "8.4.28",
@@ -370,10 +356,10 @@
       "used_by": [
         "php-embed@8.4.rb"
       ],
+      "note": "Pinned to the PHP series that php-embed@8.4 builds. The same rule as php@8.5 applies to the versioned tap formula.",
       "disable_date_in_days": 1132,
       "deprecation_date_in_days": 767,
-      "status": "scheduled_for_disable",
-      "note": "Pinned to the PHP series that php-embed@8.4 builds. The same rule as php@8.5 applies to the versioned tap formula."
+      "status": "scheduled_for_disable"
     },
     "php@8.5": {
       "current_version": "8.5.13",
@@ -569,7 +555,21 @@
       "homebrew_core_php": "8.6.0",
       "status": "matches_core_php_series",
       "note": "The tap builds the 8.5 series from the php.net tarball. homebrew-core php@8.5 is at the same version, so the build lines up. The unversioned php formula is at 8.6.0. The tap also ships php-embed@8.4 and php-embed@8.3 for the other supported PHP series.",
-      "source": "https://www.php.net/distributions/php-8.4.28.tar.xz"
+      "source": "https://www.php.net/distributions/php-8.5.13.tar.xz"
+    },
+    "php-embed@8.3": {
+      "current_version": "8.3.37",
+      "homebrew_core_php_series": "php@8.3",
+      "homebrew_core_php_series_version": "8.3.37",
+      "homebrew_core_php": "8.6.0",
+      "status": "matches_core_php_series"
+    },
+    "php-embed@8.4": {
+      "current_version": "8.4.28",
+      "homebrew_core_php_series": "php@8.4",
+      "homebrew_core_php_series_version": "8.4.28",
+      "homebrew_core_php": "8.6.0",
+      "status": "matches_core_php_series"
     }
   },
   "_comment_tap_formulae": "The tap ships one formula per supported PHP series: php-embed, php-embed@8.4, php-embed@8.3, and one unit-php module per series. Each formula pins the homebrew-core php formula of the same series. eol/check.py verifies that every pin matches the PHP version that the formula builds."
