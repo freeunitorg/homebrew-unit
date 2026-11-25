@@ -100,4 +100,16 @@ jobs:
               formula="$tap/unit,$formula"
               ;;
           esac
-          brew test-bot --only-formulae --testing-formulae="$formula"
+          brew test-bot --only-formulae --testing-formulae="$formula" 2>&1 | tee test-bot.log
+
+      - name: check the test-bot result
+        if: always()
+        run: |
+          # The test-bot ignores a failed step of a formula without a bottle,
+          # so the job stays green. Its summary names the failed step.
+          if grep -qE "failed step ignored|^Error: .*failed step" test-bot.log
+          then
+            echo "::error::test-bot reported a failed step"
+            grep -E "failed step ignored|^Error: .*failed step|==> FAILED" test-bot.log
+            exit 1
+          fi
