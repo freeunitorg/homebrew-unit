@@ -77,7 +77,16 @@ class UnitRuby < Formula
     EOS
     (testpath/"state/certs").mkpath
 
-    # The gem program of the ruby formula installs the rack gem.
+    # The module of the server needs the rack gem. Homebrew runs the test in
+    # a sandbox, where the prefix is read-only, so the gem goes to the test
+    # directory. The module finds it with the path of the gems.
+    gem_home = testpath/"gems"
+    default_gems = shell_output(
+      "#{formula_opt_bin("ruby")}/ruby -rrubygems -e 'print Gem.default_path.join(File::PATH_SEPARATOR)'",
+    ).strip
+    ENV["GEM_HOME"] = gem_home.to_s
+    ENV["GEM_PATH"] = "#{gem_home}:#{default_gems}"
+
     system formula_opt_bin("ruby")/"gem", "install", "rack"
 
     system "#{HOMEBREW_PREFIX}/bin/unitd", "--log", "#{testpath}/unit.log",
