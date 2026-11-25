@@ -2,9 +2,9 @@ class PhpEmbed < Formula
   desc "PHP library for embedding in applications"
   homepage "https://www.php.net/"
   # Should only be updated if the new version is announced on the homepage, https://www.php.net/
-  url "https://www.php.net/distributions/php-8.5.13.tar.xz"
-  mirror "https://fossies.org/linux/www/php-8.5.13.tar.xz"
-  sha256 "607602acaf0c3061818e9916ec44a058e8b3d43959a83862b9cd3ec7bf5b785f"
+  url "https://www.php.net/distributions/php-8.6.0.tar.xz"
+  mirror "https://fossies.org/linux/www/php-8.6.0.tar.xz"
+  sha256 "5f84beaa3d763aee1e4feed99bf54ec692c383b322e25626807b589238c3a087"
   license "PHP-3.01"
 
   livecheck do
@@ -36,7 +36,7 @@ class PhpEmbed < Formula
   depends_on "openldap"
   depends_on "openssl@3"
   depends_on "pcre2"
-  depends_on "php@8.5"
+  depends_on "php"
   depends_on "sqlite"
   depends_on "tidy-html5"
   depends_on "unixodbc"
@@ -47,12 +47,17 @@ class PhpEmbed < Formula
   uses_from_macos "libffi", since: :catalina
   uses_from_macos "libxml2"
   uses_from_macos "libxslt"
-  uses_from_macos "zlib"
 
   on_macos do
     # PHP build system incorrectly links system libraries
     # see https://github.com/php/php-src/issues/10680
     patch :DATA
+  end
+
+  on_linux do
+    # The built libphp links zlib-ng-compat. The homebrew-core php formula
+    # uses the same library on Linux.
+    depends_on "zlib-ng-compat"
   end
 
   def install
@@ -66,8 +71,6 @@ class PhpEmbed < Formula
               "APXS_LIBEXECDIR='$(INSTALL_ROOT)#{lib}/httpd/modules'"
       s.gsub! "-z $($APXS -q SYSCONFDIR)",
               "-z ''"
-      s.gsub! "${wl}-flat_namespace ${wl}-undefined ${wl}suppress",
-              "${wl}-twolevel_namespace"
     end
 
     # Update error message in apache sapi to better explain the requirements
@@ -87,17 +90,23 @@ class PhpEmbed < Formula
     # system pkg-config missing
     ENV["KERBEROS_CFLAGS"] = " "
     if OS.mac?
-      ENV["SASL_CFLAGS"] = "-I#{MacOS.sdk_path_if_needed}/usr/include/sasl"
+      sdk_path = MacOS.sdk_for_formula(self).path
+      ENV["SASL_CFLAGS"] = "-I#{sdk_path}/usr/include/sasl"
       ENV["SASL_LIBS"] = "-lsasl2"
+
+      # Each extension that is built on Mojave needs a direct reference to the
+      # sdk path or it won't find the headers
+      headers_path = "=#{sdk_path}/usr"
     else
       ENV["SQLITE_CFLAGS"] = "-I#{formula_opt_include("sqlite")}"
       ENV["SQLITE_LIBS"] = "-lsqlite3"
       ENV["BZIP_DIR"] = formula_opt_prefix("bzip2")
     end
 
-    # Each extension that is built on Mojave needs a direct reference to the
-    # sdk path or it won't find the headers
-    headers_path = "=#{MacOS.sdk_path_if_needed}/usr" if OS.mac?
+    # FreeUnit builds PHP against OpenSSL 3.x, see the php images in the
+    # pkg/docker directory of the FreeUnit repository. The openssl@3 formula
+    # is keg-only, so pkg-config would find the default openssl@4 instead.
+    ENV.prepend_path "PKG_CONFIG_PATH", formula_opt_lib("openssl@3")/"pkgconfig"
 
     args = %W[
       --prefix=#{prefix}
@@ -150,7 +159,7 @@ class PhpEmbed < Formula
       --with-pdo-pgsql=#{formula_opt_prefix("libpq")}
       --with-pdo-sqlite
       --with-pgsql=#{formula_opt_prefix("libpq")}
-      --with-pic
+      --enable-pic
       --with-snmp=#{formula_opt_prefix("net-snmp")}
       --with-sodium
       --with-sqlite3
@@ -164,7 +173,7 @@ class PhpEmbed < Formula
     if OS.mac?
       args << "--enable-dtrace"
       args << "--with-ldap-sasl"
-      args << "--with-os-sdkpath=#{MacOS.sdk_path_if_needed}"
+      args << "--with-os-sdkpath=#{sdk_path}"
     else
       args << "--disable-dtrace"
       args << "--without-ldap-sasl"
