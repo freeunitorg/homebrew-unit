@@ -33,7 +33,8 @@ The supported PHP series are 8.3, 8.4, 8.5, and 8.6. The main project lists the 
 - **.github/workflows/main.yml**: the matrix now builds the versioned php module with the versioned embed library of the same series.
 - **.github/workflows/main.yml**: the build step takes the tap name from the formula name. The name of the tap works for the upstream repo and for a fork. The case patterns use the bare name of the formula, because the patterns of bash need it.
 - **.github/workflows/manual.yml**: added jobs for the php embed formulae and the versioned php modules.
-- **.github/workflows/main.yml**: the job reads the summary file of the test-bot and fails when a step failed. The test-bot ignores a failed step of a formula without a bottle, so the job was green with a broken build.
+- **.github/workflows/main.yml**: the job `check-generate` runs on Linux now. The job checks the syntax of the formulae and builds the matrix, and the checks do not depend on the operating system. The pool of the macOS runners is often full, and a job that waits for a runner for 15 minutes is cancelled by GitHub.
+- **.github/workflows/main.yml**: the job fails when the test-bot reports a failed step. The test-bot ignores a failed step of a formula without a bottle, so the job was green with a broken build.
 - **unit.rb**: the unitctl resource no longer takes the version of the formula. The tool has its own release series, and the assets of the 1.37.3 release are not published yet. The resource uses the last published release, 1.37.2, until the new one appears. The build failed with the code 404 before.
 - **Aliases/**: `php-embed@8.5` and `unit-php@8.5` are gone. Every PHP series has its own formula now. `unit@1.37.2` → `unit@1.37.3`.
 
