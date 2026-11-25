@@ -13,6 +13,8 @@ class UnitPhpAT85 < Formula
     regex(/NXT_VERSION=(\S+)/i)
   end
 
+  # The openssl formula of homebrew-core is the version 4. The whole stack
+  # must use one OpenSSL version, so the paths point at the version 3.
   depends_on "openssl@3"
   depends_on "php-embed@8.5"
   depends_on "unit@1.37.3"
@@ -30,8 +32,8 @@ class UnitPhpAT85 < Formula
               "--statedir=#{var}/state/unit",
               "--tmpdir=/tmp",
               "--openssl",
-              "--cc-opt=-I#{formula_opt_include("openssl")}",
-              "--ld-opt=-L#{formula_opt_lib("openssl")}"
+              "--cc-opt=-I#{formula_opt_include("openssl@3")}",
+              "--ld-opt=-L#{formula_opt_lib("openssl@3")}"
 
     inreplace "build/autoconf.data",
         "NXT_MODULESDIR='#{HOMEBREW_PREFIX}/lib/unit/modules'",

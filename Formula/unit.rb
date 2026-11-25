@@ -15,6 +15,8 @@ class Unit < Formula
 
   depends_on "rust" => :build
   depends_on "libedit"
+  # The openssl formula of homebrew-core is the version 4. The whole stack
+  # must use one OpenSSL version, so the paths point at the version 3.
   depends_on "openssl@3"
   depends_on "pcre2"
   depends_on "pkg-config"
@@ -76,8 +78,8 @@ class Unit < Formula
               "--openssl",
               "--njs",
               "--otel",
-              "--cc-opt=-I#{formula_opt_include("openssl")}",
-              "--ld-opt=-L#{formula_opt_lib("openssl")}"
+              "--cc-opt=-I#{formula_opt_include("openssl@3")}",
+              "--ld-opt=-L#{formula_opt_lib("openssl@3")}"
 
     system "make"
     system "make", "install", "libunit-install"
