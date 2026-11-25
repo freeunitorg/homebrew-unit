@@ -2,9 +2,9 @@ class PhpEmbed < Formula
   desc "PHP library for embedding in applications"
   homepage "https://www.php.net/"
   # Should only be updated if the new version is announced on the homepage, https://www.php.net/
-  url "https://www.php.net/distributions/php-8.4.28.tar.xz"
-  mirror "https://fossies.org/linux/www/php-8.4.28.tar.xz"
-  sha256 "0c8ec360e5dd8154f270b2fd50cd44ecc824e6ee39c85f911312b80d4daecd72"
+  url "https://www.php.net/distributions/php-8.5.13.tar.xz"
+  mirror "https://fossies.org/linux/www/php-8.5.13.tar.xz"
+  sha256 "607602acaf0c3061818e9916ec44a058e8b3d43959a83862b9cd3ec7bf5b785f"
   license "PHP-3.01"
 
   livecheck do
@@ -26,7 +26,7 @@ class PhpEmbed < Formula
   depends_on "gd"
   depends_on "gettext"
   depends_on "gmp"
-  depends_on "icu4c@76"
+  depends_on "icu4c@79"
   depends_on "krb5"
   depends_on "libpq"
   depends_on "libsodium"
@@ -36,7 +36,7 @@ class PhpEmbed < Formula
   depends_on "openldap"
   depends_on "openssl@3"
   depends_on "pcre2"
-  depends_on "php"
+  depends_on "php@8.5"
   depends_on "sqlite"
   depends_on "tidy-html5"
   depends_on "unixodbc"
@@ -194,11 +194,9 @@ class PhpEmbed < Formula
 end
 
 __END__
-diff --git a/build/php.m4 b/build/php.m4
-index e45b22b7..4624b390 100644
 --- a/build/php.m4
 +++ b/build/php.m4
-@@ -429,7 +429,7 @@ dnl
+@@ -413,7 +413,7 @@
  dnl Adds a path to linkpath/runpath (LDFLAGS).
  dnl
  AC_DEFUN([PHP_ADD_LIBPATH],[
@@ -207,7 +205,7 @@ index e45b22b7..4624b390 100644
      PHP_EXPAND_PATH($1, ai_p)
      ifelse([$2],,[
        _PHP_ADD_LIBPATH_GLOBAL([$ai_p])
-@@ -476,7 +476,7 @@ dnl paths are prepended to the beginning of INCLUDES.
+@@ -460,7 +460,7 @@
  dnl
  AC_DEFUN([PHP_ADD_INCLUDE], [
  for include_path in m4_normalize(m4_expand([$1])); do
@@ -216,14 +214,12 @@ index e45b22b7..4624b390 100644
      PHP_EXPAND_PATH([$include_path], [ai_p])
      PHP_RUN_ONCE([INCLUDEPATH], [$ai_p], [m4_ifnblank([$2],
        [INCLUDES="-I$ai_p $INCLUDES"],
-diff --git a/configure.ac b/configure.ac
-index 36c6e5e3e2..71b1a16607 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -190,6 +190,14 @@ PHP_ARG_WITH([libdir],
+@@ -147,6 +147,14 @@
    [lib],
    [no])
-
+ 
 +dnl Support systems with system libraries/includes in e.g. /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk.
 +PHP_ARG_WITH([os-sdkpath],
 +  [for system SDK directory],
