@@ -30,7 +30,10 @@ class UnitPhp < Formula
         "NXT_MODULESDIR='#{HOMEBREW_PREFIX}/lib/unit/modules'",
         "NXT_MODULESDIR='#{lib}/unit/modules'"
 
-    system "./configure", "php"
+    system "./configure", "php",
+        "--config=#{Formula["php@8.5"].opt_bin}/php-config",
+        "--lib-path=#{Formula["php-embed"].opt_lib}",
+        "--module=php"
     system "make", "php-install"
   end
 
