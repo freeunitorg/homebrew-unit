@@ -6,7 +6,7 @@ class UnitJava < Formula
       revision: "b36f46297b8bf3e075f293f72b206daa72015ed8"
   head "https://github.com/freeunitorg/freeunit.git", branch: "master"
 
-  depends_on "openjdk@11"
+  depends_on "openjdk@21"
   depends_on "openssl@3"
   depends_on "unit@1.37.2"
 
