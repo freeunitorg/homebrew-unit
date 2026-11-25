@@ -13,6 +13,7 @@ The container holds Homebrew on Linux. It runs the same checks as the CI job `ch
 | `run-checks.sh` | Runs the checks. |
 | `check-components-order.py` | Checks the order of the formula components. |
 | `check-inreplace-patterns.py` | Checks the inreplace patterns of the php embed formulae. |
+| `check-patches.py` | Checks the patches of the php embed formulae. |
 
 ## Requirements
 
@@ -72,6 +73,16 @@ docker run --rm -v "$PWD:/mnt/homebrew-unit:ro" homebrew-unit-test --inreplace
 
 PHP changed the quoting of the APXS lines between the series 8.3 and 8.4. The series 8.3 uses backticks, the later series use the $() form. A formula with the patterns of the wrong series fails the build with the message `inreplace failed`. This check finds that error without a build.
 
+## Check the patches
+
+Add the `--patch` flag to check the patches of the php embed formulae. This check downloads the PHP source. It needs a network connection. The first run downloads about 40 MB. The script keeps the archives in the cache of the container.
+
+```bash
+docker run --rm -v "$PWD:/mnt/homebrew-unit:ro" homebrew-unit-test --patch
+```
+
+The php embed formulae carry a patch that fixes the linking of the system libraries of macOS. The patch is applied to the source of the PHP version of the formula. A patch with the context lines of the wrong series fails the build of macOS with the message `1 out of 2 hunks failed`. This check finds that error without a build.
+
 ## Build a formula
 
 The `--build` flag builds the given formulae. The build takes about 10 minutes for one php embed formula. The flag takes several formulae.
@@ -96,6 +107,14 @@ The inreplace check needs only Python 3. It does not need Docker.
 
 ```bash
 python3 test/check-inreplace-patterns.py
+```
+
+## Run the patch check alone
+
+The patch check needs only Python 3 and the program `patch`. It does not need Docker.
+
+```bash
+python3 test/check-patches.py
 ```
 
 ## Notes
