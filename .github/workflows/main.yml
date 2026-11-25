@@ -5,7 +5,11 @@ on:
 
 jobs:
   check-generate:
-    runs-on: macos-26
+    # The job checks the syntax of the formulae and builds the matrix. The
+    # checks do not depend on the operating system. The job runs on Linux,
+    # because the pool of the macOS runners is often full. A job that waits
+    # for a runner for 15 minutes is cancelled by GitHub.
+    runs-on: ubuntu-24.04
     outputs:
       matrix: ${{ steps.generate-matrix.outputs.matrix }}
     steps:
