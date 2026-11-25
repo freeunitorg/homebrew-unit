@@ -21,7 +21,6 @@ class PhpEmbed < Formula
 
   depends_on "pkgconf" => :build
   depends_on "argon2"
-  depends_on "curl"
   depends_on "freetds"
   depends_on "gd"
   depends_on "gettext"
@@ -49,6 +48,10 @@ class PhpEmbed < Formula
   uses_from_macos "libxslt"
 
   on_macos do
+    # The curl of homebrew-core is bound to OpenSSL 4. The whole stack must
+    # use one OpenSSL version, so the curl extension is built on macOS only.
+    depends_on "curl"
+
     # PHP build system incorrectly links system libraries
     # see https://github.com/php/php-src/issues/10680
     patch :DATA
@@ -136,7 +139,6 @@ class PhpEmbed < Formula
       --enable-sysvshm
       --enable-embed=shared
       --with-bz2#{headers_path}
-      --with-curl
       --with-external-gd
       --with-external-pcre
       --with-ffi
@@ -172,6 +174,7 @@ class PhpEmbed < Formula
 
     if OS.mac?
       args << "--enable-dtrace"
+      args << "--with-curl"
       args << "--with-ldap-sasl"
       args << "--with-os-sdkpath=#{sdk_path}"
     else
