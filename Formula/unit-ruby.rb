@@ -39,8 +39,9 @@ class UnitRuby < Formula
         "NXT_MODULESDIR='#{HOMEBREW_PREFIX}/lib/unit/modules'",
         "NXT_MODULESDIR='#{lib}/unit/modules'"
 
+    # The module needs the ruby executable, not the directory of the binaries.
     system "./configure", "ruby", "--module=ruby",
-        "--ruby=#{formula_opt_bin("ruby")}"
+        "--ruby=#{formula_opt_bin("ruby")}/ruby"
     system "make", "ruby-install"
   end
 
