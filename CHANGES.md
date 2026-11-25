@@ -56,6 +56,7 @@ The supported PHP series are 8.3, 8.4, 8.5, and 8.6. The main project lists the 
 - **php-embed.rb**, **php-embed@8.4.rb**, **php-embed@8.3.rb**: the livecheck block uses the page `https://www.php.net/downloads?source=Y` and the version of the series. The old page holds no tarball, so the livecheck reported `Unable to get versions`. The old regex also found the versions of the other series.
 - **unit-ruby.rb**: the option `--ruby` takes the ruby executable now, not the directory of the binaries. The module of the server runs the program of the option, and the build failed with the message `./configure: error: no Ruby found.` before.
 - **php-embed@8.5.rb**: the patch of the source matches the layout of the series 8.5. The context lines of the two hunks of `build/php.m4` and the context line of `configure.ac` were the ones of the other series. The build of macOS failed with the message `1 out of 2 hunks failed` before.
+- **unit-ruby.rb**: the test installs the rack gem into the test directory now. Homebrew runs the test of a formula in a sandbox, where the prefix is read-only, so the install of the gem failed with the message `Errno::EACCES`. The module of the server needs the gem, and it finds it with the path of the gems.
 
 ### Added
 
