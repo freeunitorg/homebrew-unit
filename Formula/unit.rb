@@ -114,6 +114,9 @@ class Unit < Formula
         "listeners": { "*:#{port}": { "pass": "routes" } }
       }
     EOS
+    # The server stores the configuration in the state directory, and the
+    # directory has to exist before the server starts.
+    (testpath/"state").mkpath
 
     system bin/"unitd", "--log", "#{testpath}/unit.log",
                         "--control", "unix:#{testpath}/control.sock",
