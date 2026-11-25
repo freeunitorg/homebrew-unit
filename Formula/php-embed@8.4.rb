@@ -6,12 +6,13 @@ class PhpEmbedAT84 < Formula
   mirror "https://fossies.org/linux/www/php-8.4.28.tar.xz"
   sha256 "0c8ec360e5dd8154f270b2fd50cd44ecc824e6ee39c85f911312b80d4daecd72"
   license "PHP-3.01"
-  keg_only :versioned_formula
 
   livecheck do
     url "https://www.php.net/downloads"
     regex(/href=.*?php[._-]v?(\d+(?:\.\d+)+)\.t/i)
   end
+
+  keg_only :versioned_formula
 
   head do
     url "https://github.com/php/php-src.git"
