@@ -37,6 +37,8 @@ The supported PHP series are 8.3, 8.4, and 8.5. The main project lists the same 
 - **php-embed@8.3.rb**, **php-embed@8.4.rb**: moved the `livecheck` and `head` blocks above `keg_only`. Homebrew checks the order of the formula components.
 - **unit-php.rb**, **unit-php@8.4.rb**, **unit-php@8.3.rb**: replaced `Formula["…"].opt_bin` and `Formula["…"].opt_lib` with `formula_opt_bin` and `formula_opt_lib`. The resulting path is the same.
 - **php-embed@8.3.rb**: the inreplace patterns of the configure script now use the backticks. PHP changed the quoting of the APXS lines between the series 8.3 and 8.4. The series 8.3 uses backticks, the later series use the `$()` form. The build failed with the message `inreplace failed`.
+- **php-embed.rb**, **php-embed@8.4.rb**, **php-embed@8.3.rb**: the `head` block now has the branch name. The audit reported `Git head URL must specify a branch name`.
+- **php-embed.rb**, **php-embed@8.4.rb**, **php-embed@8.3.rb**: the livecheck block uses the page `https://www.php.net/downloads?source=Y` and the version of the series. The old page holds no tarball, so the livecheck reported `Unable to get versions`. The old regex also found the versions of the other series.
 
 ### Added
 
