@@ -1,0 +1,576 @@
+{
+  "_comment": "Single source of truth for the EOL state of every package the FreeUnit Homebrew tap depends on. Read it before bumping any dependency, so a disable date never breaks CI unnoticed.",
+  "_policy_packages": "Homebrew disables a versioned formula once the unversioned formula covers it. A disabled formula cannot be installed at all, so the tap build fails with 'has been disabled because it is a versioned formula'. Move the dependency before the disable date.",
+  "_policy_tap": "The tap pins its own releases. A formula in this tap is updated when the upstream release lands, so the tap version trails the upstream branch by design.",
+  "_date_format": "eol and supported_until use YYYY-MM-DD. days_left is the number of days from the check date to the date; a negative value means the deadline has passed.",
+  "_source_homebrew": "https://formulae.brew.sh/api/formula/<name>.json",
+  "_source_tap": "https://github.com/freeunitorg/homebrew-unit",
+  "_checked": "2026-11-25",
+  "packages": {
+    "argon2": {
+      "current_version": "20190702",
+      "deprecated": false,
+      "deprecation_date": null,
+      "disabled": false,
+      "disable_date": null,
+      "used_by": [
+        "php-embed.rb",
+        "php-embed@8.3.rb",
+        "php-embed@8.4.rb"
+      ],
+      "status": "active"
+    },
+    "bison": {
+      "current_version": "3.8.2",
+      "deprecated": false,
+      "deprecation_date": null,
+      "disabled": false,
+      "disable_date": null,
+      "used_by": [
+        "php-embed.rb",
+        "php-embed@8.3.rb",
+        "php-embed@8.4.rb"
+      ],
+      "status": "active"
+    },
+    "bzip2": {
+      "current_version": "1.0.8",
+      "deprecated": false,
+      "deprecation_date": null,
+      "disabled": false,
+      "disable_date": null,
+      "used_by": [
+        "php-embed.rb",
+        "php-embed@8.3.rb",
+        "php-embed@8.4.rb"
+      ],
+      "status": "active"
+    },
+    "curl": {
+      "current_version": "8.23.0",
+      "deprecated": false,
+      "deprecation_date": null,
+      "disabled": false,
+      "disable_date": null,
+      "used_by": [
+        "php-embed.rb",
+        "php-embed@8.3.rb",
+        "php-embed@8.4.rb"
+      ],
+      "status": "active"
+    },
+    "freetds": {
+      "current_version": "1.5.22",
+      "deprecated": false,
+      "deprecation_date": null,
+      "disabled": false,
+      "disable_date": null,
+      "used_by": [
+        "php-embed.rb",
+        "php-embed@8.3.rb",
+        "php-embed@8.4.rb"
+      ],
+      "status": "active"
+    },
+    "gd": {
+      "current_version": "2.3.3",
+      "deprecated": false,
+      "deprecation_date": null,
+      "disabled": false,
+      "disable_date": null,
+      "used_by": [
+        "php-embed.rb",
+        "php-embed@8.3.rb",
+        "php-embed@8.4.rb"
+      ],
+      "status": "active"
+    },
+    "gettext": {
+      "current_version": "1.0",
+      "deprecated": false,
+      "deprecation_date": null,
+      "disabled": false,
+      "disable_date": null,
+      "used_by": [
+        "php-embed.rb",
+        "php-embed@8.3.rb",
+        "php-embed@8.4.rb"
+      ],
+      "status": "active"
+    },
+    "gmp": {
+      "current_version": "6.3.0",
+      "deprecated": false,
+      "deprecation_date": null,
+      "disabled": false,
+      "disable_date": null,
+      "used_by": [
+        "php-embed.rb",
+        "php-embed@8.3.rb",
+        "php-embed@8.4.rb"
+      ],
+      "status": "active"
+    },
+    "icu4c@79": {
+      "current_version": "79.1",
+      "deprecated": false,
+      "deprecation_date": null,
+      "disabled": false,
+      "disable_date": null,
+      "used_by": [
+        "php-embed.rb",
+        "php-embed@8.3.rb",
+        "php-embed@8.4.rb"
+      ],
+      "note": "The current ICU line. It replaces icu4c@76, which Homebrew disabled on 2026-03-29. homebrew-core php@8.4 and php both depend on icu4c@79, so the tap matches.",
+      "status": "active"
+    },
+    "krb5": {
+      "current_version": "1.22.3",
+      "deprecated": false,
+      "deprecation_date": null,
+      "disabled": false,
+      "disable_date": null,
+      "used_by": [
+        "php-embed.rb",
+        "php-embed@8.3.rb",
+        "php-embed@8.4.rb"
+      ],
+      "status": "active"
+    },
+    "libedit": {
+      "current_version": "20260512-3.1",
+      "deprecated": false,
+      "deprecation_date": null,
+      "disabled": false,
+      "disable_date": null,
+      "used_by": [
+        "php-embed.rb",
+        "php-embed@8.3.rb",
+        "php-embed@8.4.rb",
+        "unit.rb"
+      ],
+      "status": "active"
+    },
+    "libffi": {
+      "current_version": "3.8.1",
+      "deprecated": false,
+      "deprecation_date": null,
+      "disabled": false,
+      "disable_date": null,
+      "used_by": [
+        "php-embed.rb",
+        "php-embed@8.3.rb",
+        "php-embed@8.4.rb"
+      ],
+      "status": "active"
+    },
+    "libpq": {
+      "current_version": "19.0",
+      "deprecated": false,
+      "deprecation_date": null,
+      "disabled": false,
+      "disable_date": null,
+      "used_by": [
+        "php-embed.rb",
+        "php-embed@8.3.rb",
+        "php-embed@8.4.rb"
+      ],
+      "status": "active"
+    },
+    "libsodium": {
+      "current_version": "1.0.22",
+      "deprecated": false,
+      "deprecation_date": null,
+      "disabled": false,
+      "disable_date": null,
+      "used_by": [
+        "php-embed.rb",
+        "php-embed@8.3.rb",
+        "php-embed@8.4.rb"
+      ],
+      "status": "active"
+    },
+    "libxml2": {
+      "current_version": "2.15.4",
+      "deprecated": false,
+      "deprecation_date": null,
+      "disabled": false,
+      "disable_date": null,
+      "used_by": [
+        "php-embed.rb",
+        "php-embed@8.3.rb",
+        "php-embed@8.4.rb"
+      ],
+      "status": "active"
+    },
+    "libxslt": {
+      "current_version": "1.1.45",
+      "deprecated": false,
+      "deprecation_date": null,
+      "disabled": false,
+      "disable_date": null,
+      "used_by": [
+        "php-embed.rb",
+        "php-embed@8.3.rb",
+        "php-embed@8.4.rb"
+      ],
+      "status": "active"
+    },
+    "libzip": {
+      "current_version": "1.12.1",
+      "deprecated": false,
+      "deprecation_date": null,
+      "disabled": false,
+      "disable_date": null,
+      "used_by": [
+        "php-embed.rb",
+        "php-embed@8.3.rb",
+        "php-embed@8.4.rb"
+      ],
+      "status": "active"
+    },
+    "net-snmp": {
+      "current_version": "5.9.5.2",
+      "deprecated": false,
+      "deprecation_date": null,
+      "disabled": false,
+      "disable_date": null,
+      "used_by": [
+        "php-embed.rb",
+        "php-embed@8.3.rb",
+        "php-embed@8.4.rb"
+      ],
+      "status": "active"
+    },
+    "oniguruma": {
+      "current_version": "6.9.10",
+      "deprecated": false,
+      "deprecation_date": null,
+      "disabled": false,
+      "disable_date": null,
+      "used_by": [
+        "php-embed.rb",
+        "php-embed@8.3.rb",
+        "php-embed@8.4.rb"
+      ],
+      "status": "active"
+    },
+    "openjdk@21": {
+      "current_version": "21.0.13.1",
+      "deprecated": false,
+      "deprecation_date": "2028-09-30",
+      "disabled": false,
+      "disable_date": "2031-09-30",
+      "used_by": [
+        "unit-java.rb"
+      ],
+      "note": "The current LTS line. It replaces openjdk@11, which Homebrew deprecated on 2023-09-30. The FreeUnit main project tests the java module with Java 17, 21, 25, 26, and 27, so 21 is a verified target.",
+      "disable_date_in_days": 1770,
+      "deprecation_date_in_days": 675,
+      "status": "scheduled_for_disable"
+    },
+    "openldap": {
+      "current_version": "2.7.2",
+      "deprecated": false,
+      "deprecation_date": null,
+      "disabled": false,
+      "disable_date": null,
+      "used_by": [
+        "php-embed.rb",
+        "php-embed@8.3.rb",
+        "php-embed@8.4.rb"
+      ],
+      "status": "active"
+    },
+    "openssl@3": {
+      "current_version": "3.5.9",
+      "deprecated": false,
+      "deprecation_date": "2030-04-08",
+      "disabled": false,
+      "disable_date": "2031-04-08",
+      "used_by": [
+        "php-embed.rb",
+        "php-embed@8.3.rb",
+        "php-embed@8.4.rb",
+        "unit-java.rb",
+        "unit-perl.rb",
+        "unit-php.rb",
+        "unit-php@8.3.rb",
+        "unit-php@8.4.rb",
+        "unit-python3.rb",
+        "unit-ruby.rb",
+        "unit-wasm.rb",
+        "unit.rb"
+      ],
+      "note": "The 3.x LTS line. Homebrew deprecates it on 2030-04-08 and disables it on 2031-04-08. The FreeUnit main project treats 3.5.9 as the supported ceiling, so the tap can stay on openssl@3 until then.",
+      "disable_date_in_days": 1595,
+      "deprecation_date_in_days": 1230,
+      "status": "scheduled_for_disable"
+    },
+    "pcre2": {
+      "current_version": "10.49",
+      "deprecated": false,
+      "deprecation_date": null,
+      "disabled": false,
+      "disable_date": null,
+      "used_by": [
+        "php-embed.rb",
+        "php-embed@8.3.rb",
+        "php-embed@8.4.rb",
+        "unit.rb"
+      ],
+      "status": "active"
+    },
+    "perl": {
+      "current_version": "5.44.0",
+      "deprecated": false,
+      "deprecation_date": null,
+      "disabled": false,
+      "disable_date": null,
+      "used_by": [
+        "unit-perl.rb"
+      ],
+      "status": "active"
+    },
+    "php-embed@8.3": {
+      "error": "HTTP Error 503: Service Unavailable",
+      "used_by": [
+        "unit-php@8.3.rb"
+      ],
+      "status": "active"
+    },
+    "php-embed@8.4": {
+      "error": "HTTP Error 503: Service Unavailable",
+      "used_by": [
+        "unit-php@8.4.rb"
+      ],
+      "status": "active"
+    },
+    "php@8.3": {
+      "current_version": "8.3.37",
+      "deprecated": false,
+      "deprecation_date": "2027-12-31",
+      "disabled": false,
+      "disable_date": "2028-12-31",
+      "used_by": [
+        "php-embed@8.3.rb"
+      ],
+      "disable_date_in_days": 767,
+      "deprecation_date_in_days": 401,
+      "status": "scheduled_for_disable",
+      "note": "Pinned to the PHP series that php-embed@8.3 builds. The same rule as php@8.5 applies to the versioned tap formula."
+    },
+    "php@8.4": {
+      "current_version": "8.4.28",
+      "deprecated": false,
+      "deprecation_date": "2028-12-31",
+      "disabled": false,
+      "disable_date": "2029-12-31",
+      "used_by": [
+        "php-embed@8.4.rb"
+      ],
+      "disable_date_in_days": 1132,
+      "deprecation_date_in_days": 767,
+      "status": "scheduled_for_disable",
+      "note": "Pinned to the PHP series that php-embed@8.4 builds. The same rule as php@8.5 applies to the versioned tap formula."
+    },
+    "php@8.5": {
+      "current_version": "8.5.13",
+      "deprecated": false,
+      "deprecation_date": "2029-12-31",
+      "disabled": false,
+      "disable_date": "2030-12-31",
+      "used_by": [
+        "php-embed.rb"
+      ],
+      "note": "Pinned to the PHP series that the unversioned tap formula builds. The php module takes php-config from PATH, so the pin keeps the module headers and the embed library on the same PHP version. The unversioned php formula is at 8.6.0 and gives the module a different version.",
+      "disable_date_in_days": 1497,
+      "deprecation_date_in_days": 1132,
+      "status": "scheduled_for_disable"
+    },
+    "pkg-config": {
+      "current_version": "3.0.11",
+      "deprecated": false,
+      "deprecation_date": null,
+      "disabled": false,
+      "disable_date": null,
+      "used_by": [
+        "unit.rb"
+      ],
+      "alias_of": "pkgconf",
+      "note": "An alias for pkgconf in homebrew-core. The formulae.brew.sh API has no entry under this name, so the check reads pkgconf instead.",
+      "status": "active"
+    },
+    "pkgconf": {
+      "current_version": "3.0.11",
+      "deprecated": false,
+      "deprecation_date": null,
+      "disabled": false,
+      "disable_date": null,
+      "used_by": [
+        "php-embed.rb",
+        "php-embed@8.3.rb",
+        "php-embed@8.4.rb"
+      ],
+      "status": "active"
+    },
+    "python@3.12": {
+      "current_version": "3.12.16",
+      "deprecated": false,
+      "deprecation_date": "2028-11-01",
+      "disabled": false,
+      "disable_date": "2029-11-01",
+      "used_by": [
+        "unit-python3.rb"
+      ],
+      "note": "Deprecation follows the upstream Python release schedule. The FreeUnit main project ships 3.12 to 3.15 as supported runtime lines, so the tap can move when the module needs a newer interpreter.",
+      "replacement": "python@3.15",
+      "disable_date_in_days": 1072,
+      "deprecation_date_in_days": 707,
+      "status": "scheduled_for_disable"
+    },
+    "re2c": {
+      "current_version": "4.6",
+      "deprecated": false,
+      "deprecation_date": null,
+      "disabled": false,
+      "disable_date": null,
+      "used_by": [
+        "php-embed.rb",
+        "php-embed@8.3.rb",
+        "php-embed@8.4.rb"
+      ],
+      "status": "active"
+    },
+    "ruby": {
+      "current_version": "4.0.10",
+      "deprecated": false,
+      "deprecation_date": null,
+      "disabled": false,
+      "disable_date": null,
+      "used_by": [
+        "unit-ruby.rb"
+      ],
+      "status": "active"
+    },
+    "rust": {
+      "current_version": "1.100.0",
+      "deprecated": false,
+      "deprecation_date": null,
+      "disabled": false,
+      "disable_date": null,
+      "used_by": [
+        "unit-wasm.rb",
+        "unit.rb"
+      ],
+      "status": "active"
+    },
+    "sqlite": {
+      "current_version": "3.54.1",
+      "deprecated": false,
+      "deprecation_date": null,
+      "disabled": false,
+      "disable_date": null,
+      "used_by": [
+        "php-embed.rb",
+        "php-embed@8.3.rb",
+        "php-embed@8.4.rb"
+      ],
+      "status": "active"
+    },
+    "tidy-html5": {
+      "current_version": "5.8.0",
+      "deprecated": false,
+      "deprecation_date": null,
+      "disabled": false,
+      "disable_date": null,
+      "used_by": [
+        "php-embed.rb",
+        "php-embed@8.3.rb",
+        "php-embed@8.4.rb"
+      ],
+      "status": "active"
+    },
+    "unixodbc": {
+      "current_version": "2.3.14",
+      "deprecated": false,
+      "deprecation_date": null,
+      "disabled": false,
+      "disable_date": null,
+      "used_by": [
+        "php-embed.rb",
+        "php-embed@8.3.rb",
+        "php-embed@8.4.rb"
+      ],
+      "status": "active"
+    },
+    "wasmtime": {
+      "current_version": "51.0.0",
+      "deprecated": false,
+      "deprecation_date": null,
+      "disabled": false,
+      "disable_date": null,
+      "used_by": [
+        "unit-wasm.rb"
+      ],
+      "status": "active"
+    },
+    "xz": {
+      "current_version": "5.8.4",
+      "deprecated": false,
+      "deprecation_date": null,
+      "disabled": false,
+      "disable_date": null,
+      "used_by": [
+        "php-embed.rb",
+        "php-embed@8.3.rb",
+        "php-embed@8.4.rb"
+      ],
+      "status": "active"
+    },
+    "zlib": {
+      "current_version": "1.4",
+      "deprecated": false,
+      "deprecation_date": null,
+      "disabled": false,
+      "disable_date": null,
+      "used_by": [
+        "php-embed.rb",
+        "php-embed@8.3.rb",
+        "php-embed@8.4.rb"
+      ],
+      "status": "active"
+    }
+  },
+  "tap_formulae": {
+    "unit": {
+      "current_version": "1.37.2",
+      "upstream_latest_tag": "1.37.2",
+      "upstream_branch_version": "1.37.3",
+      "upstream_branch": "1.37",
+      "status": "behind_upstream_branch",
+      "note": "The tap pins the last tagged release. The 1.37 branch carries 1.37.3 with security fixes but has no tag, so the tap trails it until a release lands.",
+      "source": "https://github.com/freeunitorg/freeunit.git",
+      "revision": "b36f46297b8bf3e075f293f72b206daa72015ed8"
+    },
+    "njs": {
+      "current_version": "1.0.2",
+      "upstream_latest_tag": "1.0.2",
+      "status": "current",
+      "note": "Bundled resource of the unit formula. The tag is the latest one in the njs repository.",
+      "source": "https://github.com/freeunitorg/njs.git",
+      "revision": "10d6f68480b6be67ba2b0c5213702006cc4d4d74"
+    },
+    "php-embed": {
+      "current_version": "8.5.13",
+      "homebrew_core_php_series": "php@8.5",
+      "homebrew_core_php_series_version": "8.5.13",
+      "homebrew_core_php": "8.6.0",
+      "status": "matches_core_php_series",
+      "note": "The tap builds the 8.5 series from the php.net tarball. homebrew-core php@8.5 is at the same version, so the build lines up. The unversioned php formula is at 8.6.0. The tap also ships php-embed@8.4 and php-embed@8.3 for the other supported PHP series.",
+      "source": "https://www.php.net/distributions/php-8.4.28.tar.xz"
+    }
+  },
+  "_comment_tap_formulae": "The tap ships one formula per supported PHP series: php-embed, php-embed@8.4, php-embed@8.3, and one unit-php module per series. Each formula pins the homebrew-core php formula of the same series. eol/check.py verifies that every pin matches the PHP version that the formula builds."
+}
