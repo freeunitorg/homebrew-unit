@@ -54,6 +54,7 @@ jobs:
     needs: check-generate
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix: ${{fromJson(needs.check-generate.outputs.matrix)}}
 
     steps:
@@ -83,11 +84,15 @@ jobs:
         run: |
           formula=${{ matrix.formulae }}
           case "$formula" in
-            *-php)
+            unit-php@*)
+              series="${formula##*@}"
+              formula="freeunitorg/unit/php-embed@$series,freeunitorg/unit/unit,$formula"
+              ;;
+            unit-php)
               formula="freeunitorg/unit/php-embed,freeunitorg/unit/unit,$formula"
               ;;
             *unit-*)
               formula="freeunitorg/unit/unit,$formula"
               ;;
           esac
-          brew test-bot --only-formulae --testing-formulae="$formula" --fail-fast
+          brew test-bot --only-formulae --testing-formulae="$formula"
