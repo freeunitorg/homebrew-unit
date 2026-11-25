@@ -37,6 +37,8 @@ The supported PHP series are 8.3, 8.4, 8.5, and 8.6. The main project lists the 
 - **.github/workflows/main.yml**: the job fails when the test-bot reports a failed step. The test-bot ignores a failed step of a formula without a bottle, so the job was green with a broken build.
 - **unit.rb**: the unitctl resource no longer takes the version of the formula. The tool has its own release series, and the assets of the 1.37.3 release are not published yet. The resource uses the last published release, 1.37.2, until the new one appears. The build failed with the code 404 before.
 - **Aliases/**: `php-embed@8.5` and `unit-php@8.5` are gone. Every PHP series has its own formula now. `unit@1.37.2` → `unit@1.37.3`.
+- **unit.rb**, **unit-java.rb**, **unit-perl.rb**, **unit-php.rb**, **unit-php@8.3.rb**, **unit-php@8.4.rb**, **unit-php@8.5.rb**, **unit-python3.rb**, **unit-ruby.rb**, **unit-wasm.rb**: the build uses the paths of openssl@3 now. The formulae declared openssl@3, but the paths came from the `openssl` formula of homebrew-core, which is the version 4. The server was compiled against the headers of the version 4 and linked the library of the version 3. The whole stack must use one OpenSSL version, like the images of the FreeUnit project do.
+- **php-embed.rb**, **php-embed@8.5.rb**, **php-embed@8.4.rb**, **php-embed@8.3.rb**: the curl extension is built on macOS only. The curl of homebrew-core is bound to OpenSSL 4, and PHP is built against OpenSSL 3. The extension is not built on Linux, because a process with two OpenSSL versions is not safe. The build of Linux failed with the message `configure: error: The libcurl check failed.` before.
 
 ### Formula fixes
 
@@ -52,6 +54,8 @@ The supported PHP series are 8.3, 8.4, 8.5, and 8.6. The main project lists the 
 - **php-embed@8.3.rb**: the inreplace patterns of the configure script now use the backticks. PHP changed the quoting of the APXS lines between the series 8.3 and 8.4. The series 8.3 uses backticks, the later series use the `$()` form. The build failed with the message `inreplace failed`.
 - **php-embed.rb**, **php-embed@8.4.rb**, **php-embed@8.3.rb**: the `head` block now has the branch name. The audit reported `Git head URL must specify a branch name`.
 - **php-embed.rb**, **php-embed@8.4.rb**, **php-embed@8.3.rb**: the livecheck block uses the page `https://www.php.net/downloads?source=Y` and the version of the series. The old page holds no tarball, so the livecheck reported `Unable to get versions`. The old regex also found the versions of the other series.
+- **unit-ruby.rb**: the option `--ruby` takes the ruby executable now, not the directory of the binaries. The module of the server runs the program of the option, and the build failed with the message `./configure: error: no Ruby found.` before.
+- **php-embed@8.5.rb**: the patch of the source matches the layout of the series 8.5. The context lines of the two hunks of `build/php.m4` and the context line of `configure.ac` were the ones of the other series. The build of macOS failed with the message `1 out of 2 hunks failed` before.
 
 ### Added
 
@@ -62,6 +66,7 @@ The supported PHP series are 8.3, 8.4, 8.5, and 8.6. The main project lists the 
 - `test/README.md`: the description of the local checks
 - `test/check-components-order.py`: the check of the formula component order. It needs only Python 3.
 - `test/check-inreplace-patterns.py`: the check of the inreplace patterns of the php embed formulae. It reads the configure script of the PHP source of the formula. It needs only Python 3.
+- `test/check-patches.py`: the check of the patches of the php embed formulae. It reads the patch from the formula and applies it to the PHP source of the formula in the dry run mode. It needs only Python 3 and the program `patch`.
 - `test/run-checks.sh`: the script that runs the local checks. It runs the livecheck of every formula now. The flag `--build` builds a formula and runs the audit of it, like the CI job does.
 - `test/entrypoint.sh`: the script that prepares the working copy in the container
 - `.gitignore` for editor artefacts and OS metadata files
@@ -77,3 +82,4 @@ The supported PHP series are 8.3, 8.4, 8.5, and 8.6. The main project lists the 
 - `eol/check.py`: the formulae of the tap no longer appear in the list of the packages. The script reads the names from the `Formula` and `Aliases` directories.
 - `eol/check.py`: the script retries a request when the Homebrew API answers with the code 503.
 - `eol/eol.json`: the versions of `php-embed@8.3` and `php-embed@8.4` are now in the section `tap_formulae`. The section `packages` holds 39 packages.
+- `test/run-checks.sh`: the flag `--patch` runs the check of the patches of the php embed formulae. The check finds a patch with the context of the wrong series without a full CI cycle. The program `patch` of macOS refuses such a patch, and the program of Linux applies it with the fuzz.
