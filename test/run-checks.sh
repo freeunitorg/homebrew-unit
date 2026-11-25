@@ -146,12 +146,34 @@ then
   do
     echo
     echo "==> Building ${name}"
-    brew install --build-bottle "${TAP}/${name}" || status=1
+    # The versions of the php embed formulae install the library file with
+    # the same name. Only one of them can be linked into the prefix. The
+    # links are removed before the build, because the CI job builds one
+    # formula per runner.
+    for other in "${BUILD_TARGETS[@]}"
+    do
+      brew unlink "${TAP}/${other}" >/dev/null 2>&1 || true
+    done
+    # The CI job installs the formula with its dependencies. A dependency
+    # without a bottle is built from source. The option --build-bottle
+    # fails with an error when a dependency has no bottle.
+    if ! brew install --build-from-source "${TAP}/${name}"
+    then
+      # The link of the library file fails when another version of the
+      # formula is linked into the prefix. The formula is installed then.
+      # A failed build leaves no keg.
+      brew list --formula "${TAP}/${name}" >/dev/null 2>&1 || status=1
+    fi
     # The CI job runs the audit after the install. The audit checks the
     # files of the installed formula.
     echo
     echo "==> brew audit ${name}"
     brew audit --formula "${TAP}/${name}" --online --git --skip-style || status=1
+    # The CI job checks the linkage of the installed formula. A formula
+    # with an undeclared dependency fails the check.
+    echo
+    echo "==> brew linkage --test ${name}"
+    brew linkage --test "${TAP}/${name}" || status=1
   done
 fi
 
