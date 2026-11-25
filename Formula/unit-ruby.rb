@@ -48,7 +48,7 @@ class UnitRuby < Formula
   def caveats
     <<~EOS
       Make sure rack gem installed:
-        #{formula_opt_bin("gem")} install rack
+        #{formula_opt_bin("ruby")}/gem install rack
     EOS
   end
 
@@ -77,7 +77,8 @@ class UnitRuby < Formula
     EOS
     (testpath/"state/certs").mkpath
 
-    system formula_opt_bin("gem").to_s, "install", "rack"
+    # The gem program of the ruby formula installs the rack gem.
+    system formula_opt_bin("ruby")/"gem", "install", "rack"
 
     system "#{HOMEBREW_PREFIX}/bin/unitd", "--log", "#{testpath}/unit.log",
                         "--control", "unix:#{testpath}/control.sock",
@@ -93,6 +94,6 @@ class UnitRuby < Formula
 
     assert_match expected_output, shell_output("curl -s 127.0.0.1:#{port}")
   ensure
-    Process.kill("TERM", pid)
+    Process.kill("TERM", pid) if pid
   end
 end
