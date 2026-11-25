@@ -12,14 +12,14 @@ class PhpEmbedAT84 < Formula
     regex(/href=.*?php[._-]v?(\d+(?:\.\d+)+)\.t/i)
   end
 
-  keg_only :versioned_formula
-
   head do
     url "https://github.com/php/php-src.git"
 
     depends_on "bison" => :build # bison >= 3.0.0 required to generate parsers
     depends_on "re2c" => :build # required to generate PHP lexers
   end
+
+  keg_only :versioned_formula
 
   depends_on "pkgconf" => :build
   depends_on "argon2"
