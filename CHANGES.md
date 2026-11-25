@@ -49,6 +49,8 @@ The supported PHP series are 8.3, 8.4, and 8.5. The main project lists the same 
 - `test/`: a container that runs the local checks of the tap. It holds Homebrew on Linux.
 - `test/README.md`: the description of the local checks
 - `test/check-components-order.py`: the check of the formula component order. It needs only Python 3.
+- `test/check-inreplace-patterns.py`: the check of the inreplace patterns of the php embed formulae. It reads the configure script of the PHP source of the formula. It needs only Python 3.
+- `test/run-checks.sh`: the script that runs the local checks. It runs the livecheck of every formula now. The flag `--build` builds a formula and runs the audit of it, like the CI job does.
 - `test/run-checks.sh`: the script that runs the local checks
 - `test/entrypoint.sh`: the script that prepares the working copy in the container
 - `.gitignore` for editor artefacts and OS metadata files
