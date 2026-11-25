@@ -23,22 +23,22 @@ class UnitRuby < Formula
               "--statedir=#{var}/state/unit",
               "--tmpdir=/tmp",
               "--openssl",
-              "--cc-opt=-I#{Formula["openssl"].opt_prefix}/include -DNXT_HAVE_ISOLATION_ROOTFS=1",
-              "--ld-opt=-L#{Formula["openssl"].opt_prefix}/lib"
+              "--cc-opt=-I#{formula_opt_include("openssl")} -DNXT_HAVE_ISOLATION_ROOTFS=1",
+              "--ld-opt=-L#{formula_opt_lib("openssl")}"
 
     inreplace "build/autoconf.data",
         "NXT_MODULESDIR='#{HOMEBREW_PREFIX}/lib/unit/modules'",
         "NXT_MODULESDIR='#{lib}/unit/modules'"
 
     system "./configure", "ruby", "--module=ruby",
-        "--ruby=#{Formula["ruby"].opt_prefix}/bin/ruby"
+        "--ruby=#{formula_opt_bin("ruby")}"
     system "make", "ruby-install"
   end
 
   def caveats
     <<~EOS
       Make sure rack gem installed:
-        #{Formula["ruby"].opt_prefix}/bin/gem install rack
+        #{formula_opt_bin("gem")} install rack
     EOS
   end
 
@@ -67,7 +67,7 @@ class UnitRuby < Formula
     EOS
     (testpath/"state/certs").mkpath
 
-    system "#{Formula["ruby"].opt_prefix}/bin/gem", "install", "rack"
+    system "#{formula_opt_bin("gem")}", "install", "rack"
 
     system "#{HOMEBREW_PREFIX}/bin/unitd", "--log", "#{testpath}/unit.log",
                         "--control", "unix:#{testpath}/control.sock",
@@ -75,7 +75,7 @@ class UnitRuby < Formula
                         "--statedir", "#{testpath}/state"
     sleep 3
 
-    pid = File.open(testpath/"unit.pid").gets.chop.to_i
+    pid = File.open(testpath/"unit.pid") { |f| f.gets.chop.to_i }
 
     system "curl", "-s", "--unix-socket", "#{testpath}/control.sock",
                     "-X", "PUT",

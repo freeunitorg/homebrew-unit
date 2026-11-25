@@ -23,8 +23,8 @@ class UnitPhp < Formula
               "--statedir=#{var}/state/unit",
               "--tmpdir=/tmp",
               "--openssl",
-              "--cc-opt=-I#{Formula["openssl"].opt_prefix}/include",
-              "--ld-opt=-L#{Formula["openssl"].opt_prefix}/lib"
+              "--cc-opt=-I#{formula_opt_include("openssl")}",
+              "--ld-opt=-L#{formula_opt_lib("openssl")}"
 
     inreplace "build/autoconf.data",
         "NXT_MODULESDIR='#{HOMEBREW_PREFIX}/lib/unit/modules'",
@@ -61,7 +61,7 @@ class UnitPhp < Formula
                         "--statedir", "#{testpath}/state"
     sleep 3
 
-    pid = File.open(testpath/"unit.pid").gets.chop.to_i
+    pid = File.open(testpath/"unit.pid") { |f| f.gets.chop.to_i }
 
     system "curl", "-s", "--unix-socket", "#{testpath}/control.sock",
                     "-X", "PUT",

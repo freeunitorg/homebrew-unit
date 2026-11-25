@@ -24,8 +24,8 @@ class UnitWasm < Formula
               "--statedir=#{var}/state/unit",
               "--tmpdir=/tmp",
               "--openssl",
-              "--cc-opt=-I#{Formula["openssl"].opt_prefix}/include -DNXT_HAVE_ISOLATION_ROOTFS=1",
-              "--ld-opt=-L#{Formula["openssl"].opt_prefix}/lib"
+              "--cc-opt=-I#{formula_opt_include("openssl")} -DNXT_HAVE_ISOLATION_ROOTFS=1",
+              "--ld-opt=-L#{formula_opt_lib("openssl")}"
 
     inreplace "build/autoconf.data",
         "NXT_MODULESDIR='#{HOMEBREW_PREFIX}/lib/unit/modules'",
@@ -38,5 +38,12 @@ class UnitWasm < Formula
 
     system "./configure", "wasm-wasi-component"
     system "make", "wasm-wasi-component-install"
+  end
+
+  test do
+    assert_path_exists lib/"unit/modules", "wasm modules directory not found"
+    Dir.glob(lib/"unit/modules/nxt_wasm*").each do |f|
+      assert_predicate f, :exist?, "expected wasm module #{f} to exist"
+    end
   end
 end
