@@ -49,12 +49,17 @@ class PhpEmbedAT83 < Formula
   uses_from_macos "libffi", since: :catalina
   uses_from_macos "libxml2"
   uses_from_macos "libxslt"
-  uses_from_macos "zlib"
 
   on_macos do
     # PHP build system incorrectly links system libraries
     # see https://github.com/php/php-src/issues/10680
     patch :DATA
+  end
+
+  on_linux do
+    # The built libphp links zlib-ng-compat. The homebrew-core php formula
+    # uses the same library on Linux.
+    depends_on "zlib-ng-compat"
   end
 
   def install
@@ -89,17 +94,23 @@ class PhpEmbedAT83 < Formula
     # system pkg-config missing
     ENV["KERBEROS_CFLAGS"] = " "
     if OS.mac?
-      ENV["SASL_CFLAGS"] = "-I#{MacOS.sdk_path_if_needed}/usr/include/sasl"
+      sdk_path = MacOS.sdk_for_formula(self).path
+      ENV["SASL_CFLAGS"] = "-I#{sdk_path}/usr/include/sasl"
       ENV["SASL_LIBS"] = "-lsasl2"
+
+      # Each extension that is built on Mojave needs a direct reference to the
+      # sdk path or it won't find the headers
+      headers_path = "=#{sdk_path}/usr"
     else
       ENV["SQLITE_CFLAGS"] = "-I#{formula_opt_include("sqlite")}"
       ENV["SQLITE_LIBS"] = "-lsqlite3"
       ENV["BZIP_DIR"] = formula_opt_prefix("bzip2")
     end
 
-    # Each extension that is built on Mojave needs a direct reference to the
-    # sdk path or it won't find the headers
-    headers_path = "=#{MacOS.sdk_path_if_needed}/usr" if OS.mac?
+    # FreeUnit builds PHP against OpenSSL 3.x, see the php images in the
+    # pkg/docker directory of the FreeUnit repository. The openssl@3 formula
+    # is keg-only, so pkg-config would find the default openssl@4 instead.
+    ENV.prepend_path "PKG_CONFIG_PATH", formula_opt_lib("openssl@3")/"pkgconfig"
 
     args = %W[
       --prefix=#{prefix}
@@ -166,7 +177,7 @@ class PhpEmbedAT83 < Formula
     if OS.mac?
       args << "--enable-dtrace"
       args << "--with-ldap-sasl"
-      args << "--with-os-sdkpath=#{MacOS.sdk_path_if_needed}"
+      args << "--with-os-sdkpath=#{sdk_path}"
     else
       args << "--disable-dtrace"
       args << "--without-ldap-sasl"
