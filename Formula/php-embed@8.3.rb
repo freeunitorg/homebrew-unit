@@ -62,11 +62,11 @@ class PhpEmbedAT83 < Formula
     system "./buildconf", "--force"
 
     inreplace "configure" do |s|
-      s.gsub! "$APXS_HTTPD -V 2>/dev/null | grep 'threaded:.*yes' >/dev/null 2>&1",
-              "false"
-      s.gsub! "APXS_LIBEXECDIR='$(INSTALL_ROOT)'$($APXS -q LIBEXECDIR)",
+      s.gsub! "APACHE_THREADED_MPM=`$APXS_HTTPD -V 2>/dev/null | grep 'threaded:.*yes'`",
+              "APACHE_THREADED_MPM="
+      s.gsub! "APXS_LIBEXECDIR='$(INSTALL_ROOT)'`$APXS -q LIBEXECDIR`",
               "APXS_LIBEXECDIR='$(INSTALL_ROOT)#{lib}/httpd/modules'"
-      s.gsub! "-z $($APXS -q SYSCONFDIR)",
+      s.gsub! "-z `$APXS -q SYSCONFDIR`",
               "-z ''"
       s.gsub! "${wl}-flat_namespace ${wl}-undefined ${wl}suppress",
               "${wl}-twolevel_namespace"
