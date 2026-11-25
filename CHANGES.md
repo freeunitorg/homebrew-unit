@@ -25,6 +25,7 @@ The supported PHP series are 8.3, 8.4, and 8.5. The main project lists the same 
 - **.github/workflows/main.yml**: added `fail-fast: false` to the build matrix. One failed job no longer cancels the other jobs.
 - **.github/workflows/main.yml**: removed `--fail-fast` from `brew test-bot`. Every formula of the job now gets built.
 - **.github/workflows/main.yml**: the matrix now builds the versioned php module with the versioned embed library of the same series.
+- **.github/workflows/main.yml**: the build step takes the tap name from the formula name. The name of the tap works for the upstream repo and for a fork. The case patterns use the bare name of the formula, because the patterns of bash need it.
 - **.github/workflows/manual.yml**: added jobs for the php embed formulae and the versioned php modules.
 - **Aliases/**: `php-embed@8.4` → `php-embed@8.5`. Added `unit-php@8.5`.
 
