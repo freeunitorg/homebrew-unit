@@ -181,9 +181,9 @@ def check_version_coherence() -> list[str]:
         source = path.read_text()
         if f'depends_on "php-embed@{series}"' not in source:
             problems.append(f"{path.name}: must depend on php-embed@{series}")
-        if f'Formula["php-embed@{series}"]' not in source:
+        if f'formula_opt_lib("php-embed@{series}")' not in source:
             problems.append(f"{path.name}: must link the php-embed@{series} library")
-        if f'Formula["php@{series}"]' not in source:
+        if f'formula_opt_bin("php@{series}")' not in source:
             problems.append(f"{path.name}: must use the php@{series} php-config")
         module = "php" + series.replace(".", "")
         if f'"--module={module}"' not in source:
@@ -193,8 +193,7 @@ def check_version_coherence() -> list[str]:
 
     for path in sorted(FORMULA_DIR.glob("unit-php.rb")):
         source = path.read_text()
-        version = re.search(r'Formula\["php-embed"\]\.opt_lib', source)
-        if not version:
+        if 'formula_opt_lib("php-embed")' not in source:
             problems.append(f"{path.name}: must link the php-embed library")
         if '"--module=php"' not in source:
             problems.append(f"{path.name}: must set --module=php")
