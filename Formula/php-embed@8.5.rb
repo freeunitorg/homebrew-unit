@@ -227,8 +227,8 @@ __END__
  for include_path in m4_normalize(m4_expand([$1])); do
 -  AS_IF([test "$include_path" != "/usr/include"], [
 +  AS_IF([test "$include_path" != "$PHP_OS_SDKPATH/usr/include"], [
-     PHP_EXPAND_PATH([$include_path], ai_p)
-     PHP_RUN_ONCE([INCLUDEPATH], [$ai_p], m4_ifnblank([$2],
+     PHP_EXPAND_PATH([$include_path], [ai_p])
+     PHP_RUN_ONCE([INCLUDEPATH], [$ai_p], [m4_ifnblank([$2],
        [INCLUDES="-I$ai_p $INCLUDES"],
 --- a/configure.ac
 +++ b/configure.ac
@@ -245,5 +245,5 @@ __END__
 +  [no])
 +
  PHP_ARG_ENABLE([rpath],
-   [whether to enable rpath],
+   [whether to enable runpaths],
    [AS_HELP_STRING([--disable-rpath],
