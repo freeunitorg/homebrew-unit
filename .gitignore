@@ -3,3 +3,6 @@
 *~
 .vscode/
 .idea/
+.qwen/
+__pycache__/
+*.pyc
