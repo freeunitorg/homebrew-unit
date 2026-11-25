@@ -57,6 +57,8 @@ The supported PHP series are 8.3, 8.4, 8.5, and 8.6. The main project lists the 
 - **unit-ruby.rb**: the option `--ruby` takes the ruby executable now, not the directory of the binaries. The module of the server runs the program of the option, and the build failed with the message `./configure: error: no Ruby found.` before.
 - **php-embed@8.5.rb**: the patch of the source matches the layout of the series 8.5. The context lines of the two hunks of `build/php.m4` and the context line of `configure.ac` were the ones of the other series. The build of macOS failed with the message `1 out of 2 hunks failed` before.
 - **unit-ruby.rb**: the test installs the rack gem into the test directory now. Homebrew runs the test of a formula in a sandbox, where the prefix is read-only, so the install of the gem failed with the message `Errno::EACCES`. The module of the server needs the gem, and it finds it with the path of the gems.
+- **unit.rb**, **unit-java.rb**, **unit-perl.rb**, **unit-php.rb**, **unit-php@8.3.rb**, **unit-php@8.4.rb**, **unit-php@8.5.rb**, **unit-python3.rb**, **unit-ruby.rb**: the requests of the test have a timeout now, and the test prints the log of the server when it fails. A module that does not start blocked the request to the control socket until the timeout of the test of Homebrew, and the log with the reason was lost.
+- **unit.rb**: the test creates the state directory now. The server stores the configuration in that directory, and the directory has to exist before the server starts. The test failed with the message `Failed to store the configuration.` before.
 
 ### Added
 
