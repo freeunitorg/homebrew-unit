@@ -134,6 +134,7 @@ jobs:
       - name: Build PHP embed
         run:
           brew install --build-from-source Formula/php-embed.rb
+          brew install --build-from-source Formula/php-embed@8.5.rb
           brew install --build-from-source Formula/php-embed@8.4.rb
           brew install --build-from-source Formula/php-embed@8.3.rb
 
@@ -155,6 +156,25 @@ jobs:
       - name: Build Unit PHP module
         run:
           brew install --build-from-source Formula/unit-php.rb
+
+  build-unit-php-8-5:
+    name: Build Unit PHP 8.5 module
+    needs: build-unit
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, macos-15, macos-26]
+    steps:
+      - name: Set up Homebrew
+        id: set-up-homebrew
+        uses: Homebrew/actions/setup-homebrew@2026.11.23.1
+        with:
+          core: true
+
+      - name: Build Unit PHP 8.5 module
+        run:
+          brew install --build-from-source Formula/unit-php@8.5.rb
 
   build-unit-php-8-4:
     name: Build Unit PHP 8.4 module
