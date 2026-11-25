@@ -42,6 +42,11 @@ The supported PHP series are 8.3, 8.4, and 8.5. The main project lists the same 
 - `eol/eol.json`: the EOL state of every package the tap depends on
 - `eol/check.py`: the script that refreshes `eol.json` and checks the PHP version coherence
 - `eol/README.md`: the description of the EOL data and the update procedure
+- `test/`: a container that runs the local checks of the tap. It holds Homebrew on Linux.
+- `test/README.md`: the description of the local checks
+- `test/check-components-order.py`: the check of the formula component order. It needs only Python 3.
+- `test/run-checks.sh`: the script that runs the local checks
+- `test/entrypoint.sh`: the script that prepares the working copy in the container
 - `.gitignore` for editor artefacts and OS metadata files
 - `CHANGES.md` to track formula-level changes
 
