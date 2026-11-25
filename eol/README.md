@@ -6,7 +6,7 @@ This directory holds the end-of-life data for every package that the tap depends
 
 | File | Content |
 |---|---|
-| `eol.json` | The EOL state of all 37 packages and all 3 tap formulae. |
+| `eol.json` | The EOL state of all 40 packages and all 6 tap formulae. |
 | `check.py` | The script that fetches the live state and updates `eol.json`. |
 
 ## Why this file exists
@@ -56,16 +56,18 @@ This section records the versions that the tap pins. The `status` field gives th
 | `icu4c@79` | active | Keep it. It replaces the disabled `icu4c@76`. |
 | `openjdk@21` | disable on 2031-09-30 | Keep it. The main project tests Java 17 to 27. |
 | `openssl@3` | disable on 2031-04-08 | Keep it until then. The main project supports 3.5.9. |
+| `php` | active | Keep it. The unversioned formula of homebrew-core holds the newest series. The tap follows it. |
 | `python@3.12` | disable on 2029-11-01 | Move it to `python@3.15` when the module changes. |
-| `php@8.3` | disable on 2028-12-31 | Keep it. The main project supports PHP 8.3 to 8.5. |
-| `php@8.4` | disable on 2029-12-31 | Keep it. The main project supports PHP 8.3 to 8.5. |
-| `php@8.5` | disable on 2030-12-31 | Keep it. The main project supports PHP 8.3 to 8.5. |
+| `php@8.3` | disable on 2028-12-31 | Keep it. The main project supports PHP 8.3 to 8.6. |
+| `php@8.4` | disable on 2029-12-31 | Keep it. The main project supports PHP 8.3 to 8.6. |
+| `php@8.5` | disable on 2030-12-31 | Keep it. The main project supports PHP 8.3 to 8.6. |
+| `zlib-ng-compat` | active | Keep it. The built libphp links it on Linux. |
 
 ## PHP version coherence
 
-The tap ships one formula per supported PHP series: `php-embed`, `php-embed@8.4`, `php-embed@8.3`, and one `unit-php` module per series.
+The tap ships one formula per supported PHP series: `php-embed`, `php-embed@8.5`, `php-embed@8.4`, `php-embed@8.3`, and one `unit-php` module per series.
 
-Each formula pins the homebrew-core php formula of the same series. The pin matters because the php module reads `php-config` from `PATH`. A wrong pin gives the module the headers of another PHP version.
+The unversioned formula builds the newest series. It pins the unversioned php formula of homebrew-core, because that formula holds the newest series. The versioned formulae pin the php formula of homebrew-core of the same series. The pin matters because the php module reads `php-config` from `PATH`. A wrong pin gives the module the headers of another PHP version.
 
 Each module formula passes three arguments to the configure script.
 
@@ -75,7 +77,7 @@ Each module formula passes three arguments to the configure script.
 | `--lib-path=` | The directory with the embed-enabled libphp of the same series. |
 | `--module=` | The module name. It gives each series its own object file and its own make target. |
 
-The module names are `php`, `php84`, and `php83`. The module object files are `php.unit.so`, `php84.unit.so`, and `php83.unit.so`. They share one directory, so all three series can run at the same time.
+The module names are `php`, `php85`, `php84`, and `php83`. The module object files are `php.unit.so`, `php85.unit.so`, `php84.unit.so`, and `php83.unit.so`. They share one directory, so all four series can run at the same time.
 
 The module type stays `php` in every series. The module exports its own PHP version, so the application config selects a series with the `version` field.
 
@@ -130,5 +132,7 @@ The `gh pr checks` command exits with code 1 when a check fails. This exit code 
 ## Relation to the main project
 
 The FreeUnit repository holds the same data in `pkg/eol.json`. That file records the EOL dates of the operating systems and the runtime versions. This file records the state of the Homebrew packages.
+
+The tap follows the `1.37` branch of the FreeUnit repository. The branch carries the PHP 8.6 support and the 1.37.3 release. The `runtimes.php` list of the branch gives the supported PHP series.
 
 When you plan an update, use both files.

@@ -16,7 +16,8 @@
       "used_by": [
         "php-embed.rb",
         "php-embed@8.3.rb",
-        "php-embed@8.4.rb"
+        "php-embed@8.4.rb",
+        "php-embed@8.5.rb"
       ],
       "status": "active"
     },
@@ -29,7 +30,8 @@
       "used_by": [
         "php-embed.rb",
         "php-embed@8.3.rb",
-        "php-embed@8.4.rb"
+        "php-embed@8.4.rb",
+        "php-embed@8.5.rb"
       ],
       "status": "active"
     },
@@ -42,7 +44,8 @@
       "used_by": [
         "php-embed.rb",
         "php-embed@8.3.rb",
-        "php-embed@8.4.rb"
+        "php-embed@8.4.rb",
+        "php-embed@8.5.rb"
       ],
       "status": "active"
     },
@@ -55,7 +58,8 @@
       "used_by": [
         "php-embed.rb",
         "php-embed@8.3.rb",
-        "php-embed@8.4.rb"
+        "php-embed@8.4.rb",
+        "php-embed@8.5.rb"
       ],
       "status": "active"
     },
@@ -68,7 +72,8 @@
       "used_by": [
         "php-embed.rb",
         "php-embed@8.3.rb",
-        "php-embed@8.4.rb"
+        "php-embed@8.4.rb",
+        "php-embed@8.5.rb"
       ],
       "status": "active"
     },
@@ -81,7 +86,8 @@
       "used_by": [
         "php-embed.rb",
         "php-embed@8.3.rb",
-        "php-embed@8.4.rb"
+        "php-embed@8.4.rb",
+        "php-embed@8.5.rb"
       ],
       "status": "active"
     },
@@ -94,7 +100,8 @@
       "used_by": [
         "php-embed.rb",
         "php-embed@8.3.rb",
-        "php-embed@8.4.rb"
+        "php-embed@8.4.rb",
+        "php-embed@8.5.rb"
       ],
       "status": "active"
     },
@@ -107,7 +114,8 @@
       "used_by": [
         "php-embed.rb",
         "php-embed@8.3.rb",
-        "php-embed@8.4.rb"
+        "php-embed@8.4.rb",
+        "php-embed@8.5.rb"
       ],
       "status": "active"
     },
@@ -120,7 +128,8 @@
       "used_by": [
         "php-embed.rb",
         "php-embed@8.3.rb",
-        "php-embed@8.4.rb"
+        "php-embed@8.4.rb",
+        "php-embed@8.5.rb"
       ],
       "note": "The current ICU line. It replaces icu4c@76, which Homebrew disabled on 2026-03-29. homebrew-core php@8.4 and php both depend on icu4c@79, so the tap matches.",
       "status": "active"
@@ -134,7 +143,8 @@
       "used_by": [
         "php-embed.rb",
         "php-embed@8.3.rb",
-        "php-embed@8.4.rb"
+        "php-embed@8.4.rb",
+        "php-embed@8.5.rb"
       ],
       "status": "active"
     },
@@ -148,6 +158,7 @@
         "php-embed.rb",
         "php-embed@8.3.rb",
         "php-embed@8.4.rb",
+        "php-embed@8.5.rb",
         "unit.rb"
       ],
       "status": "active"
@@ -161,7 +172,8 @@
       "used_by": [
         "php-embed.rb",
         "php-embed@8.3.rb",
-        "php-embed@8.4.rb"
+        "php-embed@8.4.rb",
+        "php-embed@8.5.rb"
       ],
       "status": "active"
     },
@@ -174,7 +186,8 @@
       "used_by": [
         "php-embed.rb",
         "php-embed@8.3.rb",
-        "php-embed@8.4.rb"
+        "php-embed@8.4.rb",
+        "php-embed@8.5.rb"
       ],
       "status": "active"
     },
@@ -187,7 +200,8 @@
       "used_by": [
         "php-embed.rb",
         "php-embed@8.3.rb",
-        "php-embed@8.4.rb"
+        "php-embed@8.4.rb",
+        "php-embed@8.5.rb"
       ],
       "status": "active"
     },
@@ -200,7 +214,8 @@
       "used_by": [
         "php-embed.rb",
         "php-embed@8.3.rb",
-        "php-embed@8.4.rb"
+        "php-embed@8.4.rb",
+        "php-embed@8.5.rb"
       ],
       "status": "active"
     },
@@ -213,7 +228,8 @@
       "used_by": [
         "php-embed.rb",
         "php-embed@8.3.rb",
-        "php-embed@8.4.rb"
+        "php-embed@8.4.rb",
+        "php-embed@8.5.rb"
       ],
       "status": "active"
     },
@@ -226,7 +242,8 @@
       "used_by": [
         "php-embed.rb",
         "php-embed@8.3.rb",
-        "php-embed@8.4.rb"
+        "php-embed@8.4.rb",
+        "php-embed@8.5.rb"
       ],
       "status": "active"
     },
@@ -239,7 +256,8 @@
       "used_by": [
         "php-embed.rb",
         "php-embed@8.3.rb",
-        "php-embed@8.4.rb"
+        "php-embed@8.4.rb",
+        "php-embed@8.5.rb"
       ],
       "status": "active"
     },
@@ -252,7 +270,8 @@
       "used_by": [
         "php-embed.rb",
         "php-embed@8.3.rb",
-        "php-embed@8.4.rb"
+        "php-embed@8.4.rb",
+        "php-embed@8.5.rb"
       ],
       "status": "active"
     },
@@ -279,7 +298,8 @@
       "used_by": [
         "php-embed.rb",
         "php-embed@8.3.rb",
-        "php-embed@8.4.rb"
+        "php-embed@8.4.rb",
+        "php-embed@8.5.rb"
       ],
       "status": "active"
     },
@@ -293,17 +313,19 @@
         "php-embed.rb",
         "php-embed@8.3.rb",
         "php-embed@8.4.rb",
+        "php-embed@8.5.rb",
         "unit-java.rb",
         "unit-perl.rb",
         "unit-php.rb",
         "unit-php@8.3.rb",
         "unit-php@8.4.rb",
+        "unit-php@8.5.rb",
         "unit-python3.rb",
         "unit-ruby.rb",
         "unit-wasm.rb",
         "unit.rb"
       ],
-      "note": "The 3.x LTS line. Homebrew deprecates it on 2030-04-08 and disables it on 2031-04-08. The FreeUnit main project treats 3.5.9 as the supported ceiling, so the tap can stay on openssl@3 until then.",
+      "note": "The 3.x LTS line. Homebrew deprecates it on 2030-04-08 and disables it on 2031-04-08. The FreeUnit main project treats 3.5.9 as the supported ceiling, so the tap can stay on openssl@3 until then. The php embed formulae point pkg-config at openssl@3, because the default openssl of homebrew-core is the 4.x line and the FreeUnit images build PHP against OpenSSL 3.",
       "disable_date_in_days": 1595,
       "deprecation_date_in_days": 1230,
       "status": "scheduled_for_disable"
@@ -318,6 +340,7 @@
         "php-embed.rb",
         "php-embed@8.3.rb",
         "php-embed@8.4.rb",
+        "php-embed@8.5.rb",
         "unit.rb"
       ],
       "status": "active"
@@ -331,6 +354,18 @@
       "used_by": [
         "unit-perl.rb"
       ],
+      "status": "active"
+    },
+    "php": {
+      "current_version": "8.6.0",
+      "deprecated": false,
+      "deprecation_date": null,
+      "disabled": false,
+      "disable_date": null,
+      "used_by": [
+        "php-embed.rb"
+      ],
+      "note": "The newest PHP series of homebrew-core. The unversioned tap formula builds this series, so it pins this formula. homebrew-core has no versioned formula for the newest series yet. The tap moves to the next series when homebrew-core does.",
       "status": "active"
     },
     "php@8.3": {
@@ -368,9 +403,9 @@
       "disabled": false,
       "disable_date": "2030-12-31",
       "used_by": [
-        "php-embed.rb"
+        "php-embed@8.5.rb"
       ],
-      "note": "Pinned to the PHP series that the unversioned tap formula builds. The php module takes php-config from PATH, so the pin keeps the module headers and the embed library on the same PHP version. The unversioned php formula is at 8.6.0 and gives the module a different version.",
+      "note": "Pinned to the PHP series that php-embed@8.5 builds. The php module takes the php-config of the pinned series, so the module headers and the embed library stay on the same PHP version. The unversioned php formula of homebrew-core is at 8.6.0 and holds the series of the unversioned tap formula.",
       "disable_date_in_days": 1497,
       "deprecation_date_in_days": 1132,
       "status": "scheduled_for_disable"
@@ -397,7 +432,8 @@
       "used_by": [
         "php-embed.rb",
         "php-embed@8.3.rb",
-        "php-embed@8.4.rb"
+        "php-embed@8.4.rb",
+        "php-embed@8.5.rb"
       ],
       "status": "active"
     },
@@ -425,7 +461,8 @@
       "used_by": [
         "php-embed.rb",
         "php-embed@8.3.rb",
-        "php-embed@8.4.rb"
+        "php-embed@8.4.rb",
+        "php-embed@8.5.rb"
       ],
       "status": "active"
     },
@@ -461,7 +498,8 @@
       "used_by": [
         "php-embed.rb",
         "php-embed@8.3.rb",
-        "php-embed@8.4.rb"
+        "php-embed@8.4.rb",
+        "php-embed@8.5.rb"
       ],
       "status": "active"
     },
@@ -474,7 +512,8 @@
       "used_by": [
         "php-embed.rb",
         "php-embed@8.3.rb",
-        "php-embed@8.4.rb"
+        "php-embed@8.4.rb",
+        "php-embed@8.5.rb"
       ],
       "status": "active"
     },
@@ -487,7 +526,8 @@
       "used_by": [
         "php-embed.rb",
         "php-embed@8.3.rb",
-        "php-embed@8.4.rb"
+        "php-embed@8.4.rb",
+        "php-embed@8.5.rb"
       ],
       "status": "active"
     },
@@ -511,12 +551,13 @@
       "used_by": [
         "php-embed.rb",
         "php-embed@8.3.rb",
-        "php-embed@8.4.rb"
+        "php-embed@8.4.rb",
+        "php-embed@8.5.rb"
       ],
       "status": "active"
     },
-    "zlib": {
-      "current_version": "1.4",
+    "zlib-ng-compat": {
+      "current_version": "2.3.3",
       "deprecated": false,
       "deprecation_date": null,
       "disabled": false,
@@ -524,21 +565,23 @@
       "used_by": [
         "php-embed.rb",
         "php-embed@8.3.rb",
-        "php-embed@8.4.rb"
+        "php-embed@8.4.rb",
+        "php-embed@8.5.rb"
       ],
+      "note": "The zlib implementation of homebrew-core. The built libphp links it on Linux, so the tap declares it. The zlib formula is keg-only and does not give the library to the build.",
       "status": "active"
     }
   },
   "tap_formulae": {
     "unit": {
-      "current_version": "1.37.2",
+      "current_version": "1.37.3",
       "upstream_latest_tag": "1.37.2",
       "upstream_branch_version": "1.37.3",
       "upstream_branch": "1.37",
-      "status": "behind_upstream_branch",
-      "note": "The tap pins the last tagged release. The 1.37 branch carries 1.37.3 with security fixes but has no tag, so the tap trails it until a release lands.",
-      "source": "https://github.com/freeunitorg/freeunit.git",
-      "revision": "b36f46297b8bf3e075f293f72b206daa72015ed8"
+      "pinned_revision": "56ab4a5baf518b501a1afabc6b1a8c7216805b91",
+      "status": "matches_upstream_branch",
+      "note": "The tap follows the 1.37 branch, because the branch carries the PHP 8.6 support and the 1.37.3 release. The revision field of the formula pins the commit.",
+      "source": "https://github.com/freeunitorg/freeunit.git"
     },
     "njs": {
       "current_version": "1.0.2",
@@ -549,28 +592,37 @@
       "revision": "10d6f68480b6be67ba2b0c5213702006cc4d4d74"
     },
     "php-embed": {
-      "current_version": "8.5.13",
-      "homebrew_core_php_series": "php@8.5",
-      "homebrew_core_php_series_version": "8.5.13",
+      "current_version": "8.6.0",
+      "homebrew_core_php_formula": "php",
+      "homebrew_core_php_series_version": "8.6.0",
       "homebrew_core_php": "8.6.0",
       "status": "matches_core_php_series",
-      "note": "The tap builds the 8.5 series from the php.net tarball. homebrew-core php@8.5 is at the same version, so the build lines up. The unversioned php formula is at 8.6.0. The tap also ships php-embed@8.4 and php-embed@8.3 for the other supported PHP series.",
-      "source": "https://www.php.net/distributions/php-8.5.13.tar.xz"
+      "note": "The tap builds the 8.6 series from the php.net tarball. homebrew-core php is at the same version, so the build lines up. The tap also ships php-embed@8.5, php-embed@8.4 and php-embed@8.3 for the other supported PHP series.",
+      "source": "https://www.php.net/distributions/php-8.6.0.tar.xz"
     },
     "php-embed@8.3": {
       "current_version": "8.3.37",
-      "homebrew_core_php_series": "php@8.3",
+      "homebrew_core_php_formula": "php@8.3",
       "homebrew_core_php_series_version": "8.3.37",
       "homebrew_core_php": "8.6.0",
       "status": "matches_core_php_series"
     },
     "php-embed@8.4": {
       "current_version": "8.4.28",
-      "homebrew_core_php_series": "php@8.4",
+      "homebrew_core_php_formula": "php@8.4",
       "homebrew_core_php_series_version": "8.4.28",
       "homebrew_core_php": "8.6.0",
       "status": "matches_core_php_series"
+    },
+    "php-embed@8.5": {
+      "current_version": "8.5.13",
+      "homebrew_core_php_formula": "php@8.5",
+      "homebrew_core_php_series_version": "8.5.13",
+      "homebrew_core_php": "8.6.0",
+      "status": "matches_core_php_series",
+      "note": "The PHP 8.5 series. homebrew-core php@8.5 is at the same version. The module of the series is unit-php@8.5.",
+      "source": "https://www.php.net/distributions/php-8.5.13.tar.xz"
     }
   },
-  "_comment_tap_formulae": "The tap ships one formula per supported PHP series: php-embed, php-embed@8.4, php-embed@8.3, and one unit-php module per series. Each formula pins the homebrew-core php formula of the same series. eol/check.py verifies that every pin matches the PHP version that the formula builds."
+  "_comment_tap_formulae": "The tap ships one formula per supported PHP series: php-embed, php-embed@8.5, php-embed@8.4, php-embed@8.3, and one unit-php module per series. The unversioned formula builds the newest series, and it pins the unversioned homebrew-core php formula. The versioned formulae pin the homebrew-core php formula of the same series. eol/check.py verifies that every pin matches the PHP version that the formula builds."
 }
