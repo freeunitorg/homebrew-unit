@@ -75,11 +75,16 @@ class UnitPhpAT83 < Formula
 
     pid = File.open(testpath/"unit.pid") { |f| f.gets.chop.to_i }
 
-    system "curl", "-s", "--unix-socket", "#{testpath}/control.sock",
+    system "curl", "-s", "--max-time", "120", "--unix-socket", "#{testpath}/control.sock",
                     "-X", "PUT",
                     "-d", "@#{testpath}/unit.conf", "127.0.0.1/config"
 
-    assert_match expected_output, shell_output("curl -s 127.0.0.1:#{port}")
+    assert_match expected_output,
+                 shell_output("curl -s --max-time 120 127.0.0.1:#{port}")
+  rescue => e
+    # The log of the server tells why the application did not start.
+    warn shell_output("tail -20 \"#{testpath}/unit.log\"") if (testpath/"unit.log").exist?
+    raise e
   ensure
     Process.kill("TERM", pid) if pid
   end
